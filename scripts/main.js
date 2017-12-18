@@ -23,13 +23,14 @@ const starSet = () => {
     //CREATE PARTICLES
     const particles = []
     const create = () => {
-        for(i=0;i<400;i++){
+        for(i=0;i<800;i++){
             const particle ={}
             particle.x= (Math.random() * canvas.width)    
             particle.y= (Math.random() * canvas.height)   
             particles.push(particle)
-            particle.color='white'
-            particle.radius=Math.random() * 3
+            particle.color='rgba(255, 255,255, 1)'
+            particle.luminosity="1"
+            particle.radius=Math.random() * 2
         }
         
     
@@ -50,21 +51,48 @@ const starSet = () => {
                     particle.radius -= radiusChanges
                 }
             }
-            //deleting
+    
+            //Color effect
+            let currentLumi=particle.luminosity
+            let lumiSign=Math.round(Math.random())
+            let lumiChange= Math.random() * 0.2
+            if(lumiSign == 1){
+                if((particle.luminosity + lumiChange) < 1){
+                    particle.color = `rgba(255, 255,255, ${currentLumi += lumiChange})`
+                }
+            }
+            else if (lumiSign == 0) {
+                if ( (Math.round(particle.luminosity)) - lumiChange > 0.001){
+                    particle.color = `rgba(255, 255,255, ${currentLumi -= lumiChange})`
+                }
+            }
+            
+            //Deleting
             if (particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height)
             {
             particles.splice(i,1)   
             }
         }   
     }
+
+    //DRAWING THEM
+    const draw = () => 
+    {
+        context.globalCompositeOperation="source-over"
+        for(const particle of particles)
+        {
+            context.beginPath()
+            context.arc(particle.x,particle.y,particle.radius,0,Math.PI * 2)
+            context.fillStyle=particle.color
+            context.fill()
+        }
+        
+    }
     //CLEARING THEM
     const clear = () => {
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        context.clearRect(0,0,canvas.width,canvas.height)
     }
-    
-
-
-
+    create()
 
     const loop = () =>{
         window.requestAnimationFrame(loop)
@@ -74,6 +102,8 @@ const starSet = () => {
         draw()
         
     }
+    loop()
 
 }
+starSet()
 
