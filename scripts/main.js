@@ -31,7 +31,13 @@ function setup() {
     app.stage.addChild(sprite);
 }
 
-// Grid
+// Ressources
+
+let energy = 0,
+    matierials = 0,
+    food = 0;
+
+// Grid Ini
 
 let grid = new Array(30);
 
@@ -42,6 +48,8 @@ for (let i = 0; i < 31; i++){
     }
 }
 
+// Construction Previz
+
 document.addEventListener(
     'mousemove',
     (e) =>{
@@ -50,6 +58,8 @@ document.addEventListener(
         
     }
 )
+
+// Building Placement
 
 document.addEventListener(
     'click',
@@ -64,3 +74,4 @@ document.addEventListener(
         }
     }
 )
+
