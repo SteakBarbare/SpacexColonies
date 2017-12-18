@@ -21,6 +21,13 @@ const context = canvas.getContext("2d")
 
 const menuLaunch = () => {
     const starSet = () => {
+
+
+        const clear = () => {
+            context.clearRect(0,0,canvas.width,canvas.height)
+            
+        }
+
         //CREATE PARTICLES
         const particles = []
         const create = () => {
@@ -30,15 +37,31 @@ const menuLaunch = () => {
                 particle.y= (Math.random() * canvas.height)   
                 particles[i]=particle
                 particle.color='rgba(255, 255,255, 1)'
-                particle.radius=Math.random() * 1.5
+                particle.radius=Math.random() * 1.5    
+            }
+            
+        }
+        const draw = () => 
+        {
+            context.globalCompositeOperation="source-over"
+            for(const particle of particles)
+            {
                 context.beginPath()
                 context.arc(particle.x,particle.y,particle.radius,0,Math.PI * 2)
                 context.fillStyle=particle.color
                 context.fill()
             }
+            
         }
         create()  
-    }
+        const loop = () =>{
+            window.requestAnimationFrame(loop)
+            clear()
+            draw()
+            
+        }
+        loop()
+    }   
     starSet()
     const menuSet = () => {   
     }
