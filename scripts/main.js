@@ -16,54 +16,45 @@ let app = new Application({
 app.renderer.autoResize = true;
 document.body.appendChild(app.view)
 const canvas =  document.querySelector("canvas")
-const context = canvas.getContext("2d")
 
+// LUCAS
+//EARTH
+loader
+    .add("images/earth.png")
+    .load(setup);
+function setup() {
+    let earth = new Sprite(resources["images/earth.png"].texture);
+    earth.x=100;
+    app.stage.addChild(earth)
+    
+}
+loader
+    .add("images/earth.png")
+    .load(setup);
+function setup() {
+    let earth = new Sprite(resources["images/earth.png"].texture);
+    earth.x=100;
+    app.stage.addChild(earth)
+    
+}
 
 const menuLaunch = () => {
     const starSet = () => {
-
-
-        const clear = () => {
-            context.clearRect(0,0,canvas.width,canvas.height)
-            
-        }
-
         //CREATE PARTICLES
-        const particles = []
-        const create = () => {
-            for(i=0;i<1000;i++){    
-                const particle ={}
-                particle.x= (Math.random() * canvas.width)    
-                particle.y= (Math.random() * canvas.height)   
-                particles[i]=particle
-                particle.color='rgba(255, 255,255, 1)'
-                particle.radius=Math.random() * 1.5    
-            }
+        for(i=0;i<2000;i++){    
+            let x= (Math.random() * canvas.width)    
+            let y= (Math.random() * canvas.height)   
+            let radius=Math.random() * 1.5  
+            let star = new PIXI.Graphics()
+            star.beginFill(0xFFFFFF)
+            star.drawCircle(x,y,radius)
+            app.stage.addChild(star);
             
-        }
-        const draw = () => 
-        {
-            context.globalCompositeOperation="source-over"
-            for(const particle of particles)
-            {
-                context.beginPath()
-                context.arc(particle.x,particle.y,particle.radius,0,Math.PI * 2)
-                context.fillStyle=particle.color
-                context.fill()
-            }
-            
-        }
-        create()  
-        const loop = () =>{
-            window.requestAnimationFrame(loop)
-            clear()
-            draw()
-            
-        }
-        loop()
+        }  
     }   
     starSet()
     const menuSet = () => {   
     }
 } 
 menuLaunch()
+//FIN LUCAS
