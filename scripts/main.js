@@ -17,26 +17,26 @@ app.renderer.autoResize = true;
 document.body.appendChild(app.view)
 const canvas =  document.querySelector("canvas")
 
-// LUCAS
+//LUCAS
 //EARTH
 loader
     .add("images/earth.png")
+    .add("images/logo.png")
     .load(setup);
 function setup() {
-    let earth = new Sprite(resources["images/earth.png"].texture);
+    let earth = new Sprite(resources["images/earth.png"].texture)
     earth.x=100;
+    let logo = new Sprite(resources["images/logo.png"].texture)
+    logo.scale.x=0.5
+    logo.scale.y=0.5
+    logo.x=200
+    logo.y=100
+    app.stage.addChild(logo)
     app.stage.addChild(earth)
     
 }
-loader
-    .add("images/earth.png")
-    .load(setup);
-function setup() {
-    let earth = new Sprite(resources["images/earth.png"].texture);
-    earth.x=100;
-    app.stage.addChild(earth)
-    
-}
+
+
 
 const menuLaunch = () => {
     const starSet = () => {
