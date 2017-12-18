@@ -26,7 +26,7 @@ loader
 function setup() {
     let earth = new Sprite(resources["images/earth.png"].texture)
     earth.x=100;
-    let logo = new Sprite(resources["images/logo.png"].texture)
+    let logo = PIXI.Sprite.fromImage('images/logo.png')
     logo.scale.x=0.5
     logo.scale.y=0.5
     logo.x=200
@@ -36,6 +36,63 @@ function setup() {
     
 }
 
+//PARRALAX
+const tiltCanv = () => {
+    const presp="500px",
+    width=canvas.offsetWidth,
+    height=canvas.offsetHeight,
+    midWidth=width / 2,
+    midHeight=height / 2
+
+    document.addEventListener("mousemove",(event) => {
+        const posTop = canvas.offsetTop,
+        posLeft = canvas.offsetLeft,
+        cursorX = event.offsetX - posLeft,
+        cursorY = event.offsetY - posTop
+        console.log(cursorX,cursorY)
+        
+    })
+
+}
+const loop = () => {
+    window.requestAnimationFrame(loop)
+    tiltCanv()
+}
+loop()
+
+// ;(function ( $ ) {
+//     //Make your content a heroe
+//     $.fn.transformHeroes = function() {
+//         //Variables
+//         var perspective = '500px',
+//         delta = 20,
+//         width = this.width(),
+//         height = this.height(),
+//         midWidth = width / 2,
+//         midHeight = height / 2;
+//         //Events
+//         this.on({
+//             mousemove: function(e) {
+//                 var pos = $(this).offset(),
+//                 cursPosX = e.pageX - pos.left,
+//                 cursPosY = e.pageY - pos.top,
+//                 cursCenterX = midWidth - cursPosX,
+//                 cursCenterY = midHeight - cursPosY;
+  
+//                 $(this).css('transform','perspective(' + perspective + ') rotateX('+ (cursCenterY / delta) +'deg) rotateY('+ -(cursCenterX / delta) +'deg)');
+//                 $(this).removeClass('is-out');
+//             },
+//             mouseleave: function() {
+//                 $(this).addClass('is-out');
+//             }
+//         });
+//         //Return
+//         return this;
+//     };
+//   }( jQuery ));
+  
+//   //Set plugin on cards
+//   $('.card').transformHeroes();
 
 
 const menuLaunch = () => {
