@@ -1,83 +1,120 @@
-var gulp = require( 'gulp' ),
-  gulp_rename  = require('gulp-rename'),
-  gulp_plumber = require ('gulp-plumber'),
-  gulp_sourcemaps = require ('gulp-sourcemaps'),
-  gulp_notify = require('gulp-notify'),
+const gulp = require('gulp'),
+gulp_rename = require('gulp-rename'),
+gulp_rm = require('gulp-rm'),
+gulp_plumber = require ('gulp-plumber'),
+gulp_sourcemaps = require ('gulp-sourcemaps'),
+gulp_notify = require('gulp-notify'),
+// index 
+gulp_pug = require('gulp-pug'),
+// CSS/SCSS dependencies
+gulp_autoprefixer = require ('gulp-autoprefixer'),
+gulp_sass = require('gulp-sass'),
 
-  gulp_cssnano = require('gulp-cssnano'),
-  gulp_autoprefixer = require ( 'gulp-autoprefixer' ),
-  gulp_sass = require('gulp-sass'),
+// JS/ES6 dependencies
+gulp_uglify = require('gulp-uglify'),
+gulp_concat = require('gulp-concat'),
+gulp_babel = require('gulp-babel'),
+// Images
+gulp_imagemin = require('gulp-imagemin')
 
-  gulp_uglify  = require('gulp-uglify'),
-  gulp_concat = require('gulp-concat'),
-
-  gulp_imagmin = require ('gulp-imagemin');
-
-var config = {
-  dist: 'dist/',
-  src : 'src/',
-  assets: 'dist/assets/'
+const config = {
+dist: 'dist/',
+src : 'src/',
+assets: 'dist/assets/'
 }
 
-gulp.task('default', ['watch'], function() {});
+// Watch by default
+gulp.task('default', ['watch'], () => {})
 
-gulp.task('sass', function () {
-  return gulp.src(config.src + 'scss/*.scss')
-  .pipe(gulp_plumber({
-      errorHandler: gulp_notify.onError('SASS Erro  <%= error.message %>')
-  }))
+// SASS to SCSS, compress & prefix styles
+gulp.task('styles', () => {
+return gulp.src(`${config.src}styles/*.scss`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Styles error:  <%= error.message %>')}))
   .pipe(gulp_sourcemaps.init())
   .pipe(gulp_sass({
-      outputStyle: 'compressed'}).on('error', gulp_sass.logError))
-  .pipe(gulp_sourcemaps.write())
-  .pipe(gulp_autoprefixer({
-      browsers: ['last 2 versions'],
-  cascade: false
-}))
-  .pipe(gulp_rename('style.min.css'))
-  .pipe(gulp.dest(config.assets + 'css'))
-  // .pipe(gulp_notify('SASS has been compiled !'))
-});
-
-gulp.task('styles', function() {
-  return gulp.src(config.src + 'styles/*.css')
-  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('STYLES Erro  <%= error.message %>')}))
-  .pipe(gulp_sourcemaps.init())
-  .pipe(gulp_cssnano())
+    outputStyle: 'compressed'}).on('error', gulp_sass.logError))
   .pipe(gulp_sourcemaps.write())
   .pipe(gulp_autoprefixer({
     browsers: ['last 2 versions'],
     cascade: false
   }))
-  .pipe(gulp_rename('library.min.css'))
-  .pipe(gulp.dest(config.assets + 'css'))
-  // .pipe(gulp_notify('CSS minified!'))
-});
+  .pipe(gulp_rename('style.min.css'))
+  .pipe(gulp.dest(`${config.assets}css`))
+})
 
-gulp.task( 'javascript', function()
-{
-  return gulp.src([
-    config.src + 'js/*.js'
-  ])
-  .pipe(gulp_plumber({
-      errorHandler: gulp_notify.onError("JS Error: <%= error.message %>")}))
-  .pipe(gulp_sourcemaps.init())
-  .pipe( gulp_uglify())
-  .pipe( gulp_concat('main.min.js'))
-  .pipe(gulp_sourcemaps.write())
-  .pipe( gulp.dest(config.assets + 'js'));
-  // .pipe(gulp_notify('JS minified!'))
-});
+// Concat, minify & babel
+gulp.task('scripts', () => {
+return gulp.src(`${config.src}scripts/app.js`)
+  .pipe(gulp_sourcemaps.init())  
+  .pipe(gulp_plumber({ errorHandler: gulp_notify.onError('Scripts error: <%= error.message %>') }))  
+  .pipe(gulp_concat('main.min.js'))  
+  .pipe(gulp_babel({presets: ['babel-preset-es2015'].map(require.resolve)}))
+  .pipe(gulp_uglify())  
+  .pipe(gulp_sourcemaps.write())  
+  .pipe(gulp.dest(`${config.assets}js`))
+})
 
-gulp.task('imagemin', function()
-{
-  return gulp.src(config.src + 'img/*')
-  .pipe(gulp_imagmin())
-  .pipe(gulp.dest(config.assets + 'img'))
-  // .pipe(gulp_notify('Images minified!'))
-});
+gulp.task('index', () => {
+gulp
+  .src(`${config.src}index.pug`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Pug error:  <%= error.message %>')}))
+  .pipe(gulp_pug())
+  .pipe(gulp.dest(`${config.dist}`))  
+})
 
-gulp.task( 'watch', ['sass', 'javascript', 'imagemin'], function() {
-  gulp.watch(config.src + 'scss/**/*.scss', ["sass"]);
-  gulp.watch(config.src + 'js/**/*.js', ["javascript"]);
-});
+gulp.task('views', () => {
+gulp
+  .src(`${config.src}views/*.pug`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Pug error:  <%= error.message %>')}))
+  .pipe(gulp_pug())
+  .pipe(gulp.dest(`${config.dist}views`))  
+})
+
+gulp.task('fonts', () => {
+gulp
+  .src(`${config.src}fonts/*`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Fonts error:  <%= error.message %>')}))
+  .pipe(gulp.dest(`${config.assets}fonts`))
+})
+
+gulp.task('images', () => {
+gulp
+  .src(`${config.src}images/*`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Image error:  <%= error.message %>')}))
+  .pipe(gulp_imagemin([
+    gulp_imagemin.gifsicle({interlaced: true}),
+    gulp_imagemin.jpegtran({progressive: true}),
+    gulp_imagemin.optipng({optimizationLevel: 5}),
+    gulp_imagemin.svgo({
+      plugins: [
+        {removeViewBox: true},
+        {cleanupIDs: false}
+      ]
+    })
+  ], {
+    verbose: true
+  }))
+  .pipe(gulp.dest(`${config.assets}images/src`)) 
+})
+
+// Manual function
+gulp.task('clean', () => {
+return gulp.src(`${config.dist}**/*`, { read: false })
+  .pipe(gulp_rm())
+})
+
+gulp.task('srcset', () => {
+return gulp.src(`${config.assets}images/src/*`)
+  .pipe(gulp_plumber({errorHandler: gulp_notify.onError('Srcset error:  <%= error.message %>')}))	
+  .pipe(gulp.dest(`${config.assets}images`))
+})
+
+// Wath changes
+gulp.task('watch', ['index', 'styles', 'scripts', 'images', 'fonts'], () => {
+gulp.watch(`${config.src}index.pug`, ['index'])
+gulp.watch(`${config.src}views/**/*.pug`, ['views'])
+gulp.watch(`${config.src}styles/**/*.scss`, ['styles'])
+gulp.watch(`${config.src}scripts/**/*.js`, ['scripts'])
+gulp.watch(`${config.src}images/**/*`, ['images'])
+gulp.watch(`${config.src}fonts/*`, ['fonts'])
+})
