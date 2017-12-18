@@ -1,5 +1,21 @@
-* {padding: 0; margin: 0}
-
 body{
     overflow:hidden;
+}
+
+.green, .red, .yellow{
+    width: 100px;
+    height: 100px;
+    display:inline-block;
+}
+
+.green{
+    background: green;
+}
+
+.red{
+    background: red;
+}
+
+.yellow{
+    background: yellow;
 }

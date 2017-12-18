@@ -1,77 +1,154 @@
+// const mouse = {x: 0, y: 0}
+// console.log(mouse.x, mouse.y)
+// //Saving mouse coordinates during mouse move
+// document.addEventListener('mousemove',(event) =>{
+//     mouse.x = event.clientX
+//     mouse.y = event.clientY
+// })
+
+// //Create a Pixi Application
+// let app = new PIXI.Application({ 
+//     width: 3000, 
+//     height: 3000,                       
+//     antialias: true, 
+//     transparent: false, 
+//     resolution: 1,
+//     forceCanvas: true,
+//   }
+// )
+
+// //Add the canvas that Pixi automatically created for you to the HTML document
+// document.body.appendChild(app.view)
+
+// //load an image and run the `setup` function when it's done
+// PIXI.loader
+//   .add("images/cat.png")
+//   .load(setup)
+//     let cat;
+// //This `setup` function will run when the image has loaded
+// function setup() {
+    //   //Create the cat sprite
+    //   cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture)
+//   //Add the cat to the stage
+//   app.stage.addChild(cat)
+// }
+
+// document.addEventListener('mousemove', (event) => {
+    //     cat.x = mouse.x - (cat.width/2)
+    //     cat.y = mouse.y - (cat.height/2)
+// })
+
+// document.addEventListener('click', (event) => {
+    //     setup()
+    // })
+    
+    //Type of buildings Array
+const buildings = ["HeadQuarters", "Farm", "EnergyGenerator"]
+let buildingName = "HeadQuarters";
+const $green = document.querySelector('.green')
+const $red = document.querySelector('.red')
+const $yellow = document.querySelector('.yellow')
+//
+
+$green.addEventListener('click', (event)=>
+{
+    buildingName = buildings[0]
+    console.log(buildingName)
+})
+
+
+$red.addEventListener('click', (event)=>
+{
+    buildingName = buildings[1]
+    console.log(buildingName)
+})
+
+
+$yellow.addEventListener('click', (event)=>
+{
+    buildingName = buildings[2]
+    console.log(buildingName)    
+})
+
 let Application = PIXI.Application,
-    loader = PIXI.loader,
-    resources = PIXI.loader.resources,
-    Sprite = PIXI.Sprite;
+loader = PIXI.loader,
+resources = PIXI.loader.resources,
+Sprite = PIXI.Sprite;
 
 //Create a Pixi Application
 let app = new PIXI.Application({
-    width: 3000,
-    height: 3000,
-    antialias: true, 
-    transparent: false, 
-    resolution: 1,
-    forceCanvas: true
+width: 3000,
+height: 3000,
+antialias: true, 
+transparent: false, 
+resolution: 1,
+forceCanvas: true
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
+const canvasBuilder = document.querySelector('canvas')
 
 app.renderer.backgroundColor = 0x061639;
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
-app.renderer.resize(window.innerWidth, window.innerHeight);
+app.renderer.resize(window.innerWidth, window.innerHeight)
+
+
 
 PIXI.loader
-.add("Pute", "images/testSprites/1.png")
-.load(setup);
+.add("HeadQuarters", "images/QG.png")
+.add("Farm", "images/cat.png")
+
+
 let sprite;
-function setup() {
-    sprite = new PIXI.Sprite(PIXI.loader.resources.Pute.texture);
+function setup(buildingName) {
+    sprite = new PIXI.Sprite(PIXI.loader.resources.buildingName.texture);
     app.stage.addChild(sprite);
 }
+
 
 // Ressources
 
 let energy = 0,
-    matierials = 0,
-    food = 0;
+materials = 0,
+food = 0;
 
 // Grid Ini
 
 let grid = new Array(30);
 
 for (let i = 0; i < 31; i++){
-    grid[i] = [i*100];
-    for(let j = 0; j < 31; j++){
-        grid[i][j] = [i*100, j*100, 0];
-    }
+grid[i] = [i*100];
+for(let j = 0; j < 31; j++){
+    grid[i][j] = [i*100, j*100, 0];
+}
 }
 
 // Construction Previz
 
-document.addEventListener(
-    'mousemove',
-    (e) =>{
-        sprite.x = e.clientX - (e.clientX % 100);
-        sprite.y = e.clientY - (e.clientY % 100);
-        
-    }
+
+canvasBuilder.addEventListener(
+'mousemove',
+(e) =>{
+    sprite.x = e.clientX - (e.clientX % 100);
+    sprite.y = e.clientY - (e.clientY % 100);
+}
 )
 
 // Building Placement
 
-document.addEventListener(
-    'click',
-    (e) =>{
-        const coordX = ((e.clientX - (e.clientX % 100)) / 100);
-        const coordY = ((e.clientY - (e.clientY % 100)) / 100);
-        if(grid[coordX][coordY][2] == 0){
-            setup();
-            grid[coordX][coordY][2] = 1
-        }else{
-        console.log('Pute');
-        }
+canvasBuilder.addEventListener(
+'click',
+(e) =>{
+    const coordX = ((e.clientX - (e.clientX % 100)) / 100);
+    const coordY = ((e.clientY - (e.clientY % 100)) / 100);
+    if(grid[coordX][coordY][2] == 0){
+        setup(buildingName);
+        grid[coordX][coordY][2] = 1
+    }else{
+    console.log('Pute');
     }
+}
 )
-
