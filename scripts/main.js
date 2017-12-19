@@ -243,6 +243,19 @@ document.addEventListener(
 const actualFood = document.querySelector('.food');
 const actualPilgrims = document.querySelector('.pilgrims');
 
+// Food Consumption & Production
+
+setInterval(
+    ()=>{
+        let production = 0;
+        for(let i = 0; i < grid.length; i++){
+            for(let j = 0; j < grid.length; j++){
+                if(grid[i][j][2] == "greenhouse"){
+                    production++;
+                }
+            }
+        }
+        food -= 0.05 * pilgrims - (production * 0.6);
 // Ressources Consumption & Production
 
 setInterval(
