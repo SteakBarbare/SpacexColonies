@@ -1,5 +1,4 @@
-const buildings = ["HeadQuarters", "Farm", "EnergyGenerator"]
-let buildingName = "HeadQuarters";
+let buildingName = "headQuarters";
 const $green = document.querySelector('.green')
 const $red = document.querySelector('.red')
 const $yellow = document.querySelector('.yellow')
@@ -11,28 +10,34 @@ Sprite = PIXI.Sprite;
 
 //Create a Pixi Application
 let app = new PIXI.Application({
-width: 3000,
-height: 3000,
-antialias: true, 
-transparent: false, 
-resolution: 1,
-forceCanvas: true
+    width: 3000,
+    height: 3000,
+    antialias: true, 
+    transparent: false, 
+    resolution: 1,
+    forceCanvas: true
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 const canvasBuilder = document.querySelector('canvas')
 
-app.renderer.backgroundColor = 0x061639;
+app.renderer.backgroundColor = 0xc1440e;
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
 app.renderer.resize(window.innerWidth, window.innerHeight)
 
 PIXI.loader
-.add("HeadQuarters", "images/QG.png")
-.add("Farm", "images/cat.png")
-.add("Pute", "images/testSprites/1.png")
+.add("headQuarters", "images/headquarters.png")
+.add("D3Printer", "images/3DPrinter.png")
+.add("solarTurbine", "images/solarTurbine.png")
+.add("greenhouse", "images/greenhouse.png")
+.add("silo", "images/silo.png")
+.add("battery", "images/battery.png")
+.add("houses", "images/houses.png")
+.add("drill", "images/drill.png")
+
 .load(setupIni);
 
 // Sprite Création
@@ -42,14 +47,44 @@ let sprite;
 function setup() {
     const coordX = sprite.x;
     const coordY = sprite.y;
-    console.log("Jeej");
-    if(buildingName == "HeadQuarters"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
+    console.log("Pute");
+    if(buildingName == "headQuarters"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.headQuarters.texture);
         sprite.x = coordX;
         sprite.y = coordY;
         app.stage.addChild(sprite);
-    }else if(buildingName == "Farm"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.Farm.texture);
+    }else if(buildingName == "greenhouse"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.greenhouse.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "D3Printer"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.D3Printer.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "solarTurbine"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.solarTurbine.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "silo"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.silo.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "battery"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.battery.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "houses"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.houses.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "drill"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.drill.texture);
         sprite.x = coordX;
         sprite.y = coordY;
         app.stage.addChild(sprite);
@@ -57,275 +92,18 @@ function setup() {
 }
 
 function setupIni() {
-
-    if(buildingName == "HeadQuarters"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
-        app.stage.addChild(sprite);
-    }else if(buildingName == "Farm"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.Farm.texture);
-        app.stage.addChild(sprite);
-    }
-}
-
-//Buildings cost and effects
-
-const headQuarters = {
-    name: "HeadQuarters",
-    description: "",
-    materialsPrice: 0,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 0,
-    energyProduction: 0,
-    energyUsed: 0,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const threeDPrinter = {
-    name: "3D Pinter",
-    description: "",
-    materialsPrice: 0,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 0,
-    energyProduction: 0,
-    energyUsed: 5,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const hydroOxygenComplex = {
-    name: "Hydro-Oxygen Complex",
-    description: "",
-    materialsPrice: 25,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 50,
-    energyProduction: 0,
-    energyUsed: 5,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const solarTurbine = {
-    name: "Solar Turbine",
-    description: "",
-    materialsPrice: 25,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 20,
-    energyProduction: 20,
-    energyUsed: 5,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const greenhouse = {
-    name: "Greenhouse",
-    description: "",
-    materialsPrice: 20,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 100,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 4,
-    foodLimit: 0,
-    pop: 0
-}
-
-const sulfurFactory = {
-    name: "Sulfur Factory",
-    description: "",
-    materialsPrice: 25,
-    materialsProduction: 5,
-    materialLimit: 0,
-    energyPrice: 130,
-    energyProduction: 0,
-    energyUsed: 5,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const silo = {
-    name: "Silo",
-    description: "",
-    materialsPrice: 50,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 50,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 100,
-    pop: 0
-}
-
-const battery = {
-    name: "Battery",
-    description: "",
-    materialsPrice: 200,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 200,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const warehouse = {
-    name: "Warehouse",
-    description: "",
-    materialsPrice: 150,
-    materialsProduction: 0,
-    materialLimit: 100,
-    energyPrice: 150,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const launchingRamp = {
-    name: "Launching ramp",
-    description: "",
-    materialsPrice: 150,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 90,
-    energyProduction: 0,
-    energyUsed: 50,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const houses = {
-    name: "Houses",
-    description: "",
-    materialsPrice: 35,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 50,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const sickBay = {
-    name: "Sick Bay",
-    description: "",
-    materialsPrice: 40,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 100,
-    energyProduction: 0,
-    energyUsed: 10,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const sportsHall = {
-    name: "Sports Hall",
-    description: "",
-    materialsPrice: 100,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 150,
-    energyProduction: 0,
-    energyUsed: 20,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const leindenfrostTurbine = {
-    name: "Leindenfrost Turbine",
-    description: "",
-    materialsPrice: 300,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 500,
-    energyProduction: 45,
-    energyUsed: 0,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-const oilSlickDrill = {
-    name: "Oil Slick Drill",
-    description: "",
-    materialsPrice: 800,
-    materialsProduction: 0,
-    materialLimit: 0,
-    energyPrice: 300,
-    energyProduction: 0,
-    energyUsed: 100,
-    energyLimit: 0,
-    foodProduction: 0,
-    foodLimit: 0,
-    pop: 0
-}
-
-//Array of all the buldings objects
-const buildingsDetails =[headQuarters, threeDPrinter, hydroOxygenComplex, solarTurbine, greenhouse, sulfurFactory, silo, battery, warehouse, launchingRamp, houses, sickBay, sportsHall, leindenfrostTurbine, oilSlickDrill]
-
-
-
-// Building Selection
-
-$green.addEventListener('click', (event)=>
-{
-    buildingName = buildings[0]
+    const coordX = (canvasBuilder.width / 2 - (canvasBuilder.width / 2 % 100)) / 100;
+    const coordY = (canvasBuilder.height / 2 - (canvasBuilder.height / 2 % 100)) / 100;
+    console.log("Jeej");
+    sprite = new PIXI.Sprite(PIXI.loader.resources.headQuarters.texture);
+    sprite.x = coordX * 100;
+    sprite.y = coordY * 100;
+    grid[coordX][coordY][2] = "headQuarters";
+    app.stage.addChild(sprite);
+    sprite = new PIXI.Sprite(PIXI.loader.resources.headQuarters.texture);
     app.stage.removeChild(sprite);
-    setup();
-    selection = false;
-    console.log(buildingName)
-})
-
-
-$red.addEventListener('click', (event)=>
-{
-    buildingName = buildings[1]
-    app.stage.removeChild(sprite);
-    setup();
-    selection = false;
-    console.log(buildingName)
-})
-
-
-$yellow.addEventListener('click', (event)=>
-{
-    buildingName = buildings[2]
-    console.log(buildingName)    
-})
+    selection = true;
+}
 
 // Ressources
 
@@ -347,6 +125,12 @@ for (let i = 0; i < 31; i++){
     grid[i] = [i*100];
     for(let j = 0; j < 31; j++){
         grid[i][j] = [i*100, j*100, 0];
+    if(buildingName == "HeadQuarters"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
+        app.stage.addChild(sprite);
+    }else if(buildingName == "Farm"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.Farm.texture);
+        app.stage.addChild(sprite);
     }
 }
 
@@ -424,3 +208,297 @@ setInterval(
     },
     100
 );
+
+// Building Selection
+
+$green.addEventListener('click', (event)=>
+{
+    buildingName = buildings[0].gameName;
+    console.log(buildingName);
+    app.stage.removeChild(sprite);
+    setup();
+    selection = false;
+
+})
+
+
+$red.addEventListener('click', (event)=>
+{
+    buildingName = buildings[1].gameName;
+    app.stage.removeChild(sprite);
+    setup();
+    selection = false;
+    console.log(buildingName);
+})
+
+
+$yellow.addEventListener('click', (event)=>
+{
+    buildingName = buildings[4].gameName;
+    app.stage.removeChild(sprite);
+    setup();
+    selection = false;
+    console.log(buildingName);   
+})
+
+//Buildings stats
+
+const headQuarters = {
+    name: "HeadQuarters",
+    gameName: "headQuarters",
+    description: "",
+    materialsPrice: 0,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 0,
+    energyProduction: 0,
+    energyUsed: 0,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const threeDPrinter = {
+    name: "3D Printer",
+    gameName: "D3Printer",
+    description: "",
+    materialsPrice: 0,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 0,
+    energyProduction: 0,
+    energyUsed: 5,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const hydroOxygenComplex = {
+    name: "Hydro-Oxygen Complex",
+    gameName: "hydroOxygenComplex",
+    description: "",
+    materialsPrice: 25,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 50,
+    energyProduction: 0,
+    energyUsed: 5,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const solarTurbine = {
+    name: "Solar Turbine",
+    gameName: "solarTurbine",
+    description: "",
+    materialsPrice: 25,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 20,
+    energyProduction: 20,
+    energyUsed: 5,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const greenhouse = {
+    name: "Greenhouse",
+    gameName: "greenhouse",
+    description: "",
+    materialsPrice: 20,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 100,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 4,
+    foodLimit: 0,
+    pop: 0
+}
+
+const sulfurFactory = {
+    name: "Sulfur Factory",
+    gameName: "",
+    description: "",
+    materialsPrice: 25,
+    materialsProduction: 5,
+    materialLimit: 0,
+    energyPrice: 130,
+    energyProduction: 0,
+    energyUsed: 5,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const silo = {
+    name: "Silo",
+    gameName: "silo",
+    description: "",
+    materialsPrice: 50,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 50,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 100,
+    pop: 0
+}
+
+const battery = {
+    name: "Battery",
+    gameName: "battery",
+    description: "",
+    materialsPrice: 200,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 200,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const warehouse = {
+    name: "Warehouse",
+    gameName: "",
+    description: "",
+    materialsPrice: 150,
+    materialsProduction: 0,
+    materialLimit: 100,
+    energyPrice: 150,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const launchingRamp = {
+    name: "Launching ramp",
+    gameName: "",
+    description: "",
+    materialsPrice: 150,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 90,
+    energyProduction: 0,
+    energyUsed: 50,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const houses = {
+    name: "Houses",
+    gameName: "houses",
+    description: "",
+    materialsPrice: 35,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 50,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const sickBay = {
+    name: "Sick Bay",
+    gameName: "",
+    description: "",
+    materialsPrice: 40,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 100,
+    energyProduction: 0,
+    energyUsed: 10,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const sportsHall = {
+    name: "Sports Hall",
+    gameName: "",
+    description: "",
+    materialsPrice: 100,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 150,
+    energyProduction: 0,
+    energyUsed: 20,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const leindenfrostTurbine = {
+    name: "Leindenfrost Turbine",
+    gameName: "",
+    description: "",
+    materialsPrice: 300,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 500,
+    energyProduction: 45,
+    energyUsed: 0,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+const oilSlickDrill = {
+    name: "Oil Slick Drill",
+    gameName: "drill",
+    description: "",
+    materialsPrice: 800,
+    materialsProduction: 0,
+    materialLimit: 0,
+    energyPrice: 300,
+    energyProduction: 0,
+    energyUsed: 100,
+    energyLimit: 0,
+    foodProduction: 0,
+    foodLimit: 0,
+    pop: 0
+}
+
+//Array of all the buldings objects
+
+const buildings =[
+    headQuarters, 
+    threeDPrinter, 
+    hydroOxygenComplex, 
+    solarTurbine, 
+    greenhouse, 
+    sulfurFactory, 
+    silo, 
+    battery, 
+    warehouse, 
+    launchingRamp,
+    houses, 
+    sickBay, 
+    sportsHall, 
+    leindenfrostTurbine, 
+    oilSlickDrill
+];
