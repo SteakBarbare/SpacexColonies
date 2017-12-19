@@ -92,7 +92,6 @@ function setup() {
 }
 
 function setupIni() {
-
     const coordX = (canvasBuilder.width / 2 - (canvasBuilder.width / 2 % 100)) / 100;
     const coordY = (canvasBuilder.height / 2 - (canvasBuilder.height / 2 % 100)) / 100;
     console.log("Jeej");
@@ -126,6 +125,12 @@ for (let i = 0; i < 31; i++){
     grid[i] = [i*100];
     for(let j = 0; j < 31; j++){
         grid[i][j] = [i*100, j*100, 0];
+    if(buildingName == "HeadQuarters"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
+        app.stage.addChild(sprite);
+    }else if(buildingName == "Farm"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.Farm.texture);
+        app.stage.addChild(sprite);
     }
 }
 
