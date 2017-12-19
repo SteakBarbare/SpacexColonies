@@ -51,34 +51,30 @@ const tiltCanv = (elem) => {
         cursorY = event.offsetY - posTop,
         cursorCenterX = midWidth - cursorX,
         cursorCenterY = midHeight - cursorY,
-        angle=20
+        angle=50
         elem.style.transform='perspective(' + perspective + ') rotateX('+(cursorCenterY / angle) +'deg) rotateY('+ -(cursorCenterX / angle) + 'deg)';
         elem.classList.remove("isOut") 
     })
     document.addEventListener("mousemove",(event) => {
         elem.classList.add("isOut")
     })
-
 }
 const loop = () => {
     window.requestAnimationFrame(loop)
-    tiltCanv(document.querySelector("#tiltTest"))
-    
+    tiltCanv(document.querySelector(".selecPlay"))
 }
 loop()
-
-
-
-
 const menuLaunch = () => {
     //variable
     const starSet = () => {
+        const starArray = []
         //CREATE PARTICLES
-        for(i=0;i<2000;i++){    
-            let x= (Math.random() * canvas.width)    
-            let y= (Math.random() * canvas.height)   
+        for(i=0;i<1000;i++){    
+            let x= (Math.random() * document.body.offsetWidth)    
+            let y= (Math.random() * document.body.offsetHeight)   
             let radius=Math.random() * 1.5  
             let star = new PIXI.Graphics()
+            starArray[i]=star
             star.beginFill(0xFFFFFF)
             star.drawCircle(x,y,radius)
             app.stage.addChild(star);
@@ -86,21 +82,8 @@ const menuLaunch = () => {
         }  
     }   
     starSet()
+    const earthArea = document.querySelector(".earthArea")
     const menuSet = () => {  
-        const drawRing = (name,thickness,color,x,y,radius) => {
-            name = new PIXI.Graphics()
-            name.lineStyle(thickness, color)
-            name.drawCircle(x, y, radius)
-            name.endFill()
-            app.stage.addChild(name)
-            
-
-        }
-        const earthArea = document.querySelector(".earthArea")
-        earthArea.style.top = "80%"
-        earthArea.style.left= "80%"
-
-        
         const organicCircle = (elem) => {
             document.addEventListener("mousemove",(event) => {
                 cursorX = event.clientX,
@@ -109,7 +92,6 @@ const menuLaunch = () => {
                 posELemY = elem.offsetTop,
                 xRatio=posELemX - cursorX,
                 yRatio=posELemY - cursorY
-                
                 // const circleAttractFar = (elem) => {
                 //     const tendX = xRatio-15
                 //     const tendY = yRatio-15
@@ -120,27 +102,20 @@ const menuLaunch = () => {
                 if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
                     elem.style.animation="expend 0.2s both"
                     elem.style.backgroundImage="url('images/x.png')"
-                
-                
                 }
-                
                 else if(xRatio <100 && yRatio<100){
                     elem.style.animation=""
+                    elem.style.backgroundImage=""
                     // circleAttractFar(elem)
                     
                 }
                 else{
                     elem.style.animation="pulse 3s infinite"
-                    elem.style.backgroundImage=""
+                    
                 }
-
             })
         }
-        organicCircle(earthArea)
-
-        
-        
-        
+        organicCircle(earthArea)  
     }
     menuSet()
 

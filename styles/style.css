@@ -2,12 +2,22 @@ body{
     overflow:hidden;
 }
 div,canvas{
-    background: black;
+    
     transform: rotateX(0) rotateY(0);
     transform-style: preserve-3d;
     transition-duration: 0.1s;
     
     
+}
+.homePage{
+    
+}
+.homePage .buttonUser{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background: none;
 }
 .homePage #tiltTest{
     width: 100px;
@@ -33,16 +43,77 @@ div,canvas{
     transition-duration: 1s;
     background-repeat: no-repeat;
     background-position: center;    
+    top:80%;
+    left: 80%;
 }
-.homePage .logoTitle{
+.homePage .titleZone{
     position: absolute;
     z-index: 2;
-    perspective: 300px;
+    top: 10%;
+    left: 10%;
+}
+.homePage #playBtn{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    border:solid white 1.5px;
+    top:170%;
+    left:92%;
+    text-align: center;
+    font-family:Lato;
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+    padding-top: 12px;
+    z-index: 30;
+    transition-duration: 0.5s;
     
+}
+.homePage #playBtn:hover{
+    cursor: pointer;
+    background: white;
+    color:black;
+    border-color: black;
+}
+
+.homePage .logoTitle{
+    z-index: 2;
+    top:20%;    
+    left:10%;
 }
 .homePage .selecArea:hover{
     cursor: pointer;
 }
+.homePage .infoEarth{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+}
+.infoEarth .earthFrame{
+    position: absolute;
+    height: 400px;
+    width: 300px;
+    background: rgba(255,255,255,0.5);   
+
+}
+.infoEarth .earthString{
+    height: 2px;
+    width: 60px;
+    background: rgba(255,255,255,0.5);  
+    position: absolute;
+}
+.earthString.string1{
+
+}
+.earthString.string2{
+    
+}
+.infoEarth .earthBullet{
+    
+}
+
 @keyframes pulse {
     from {
         transform: scale3d(1, 1, 1);
