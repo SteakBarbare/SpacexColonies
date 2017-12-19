@@ -8,7 +8,7 @@ div,canvas{
     transition-duration: 0.1s;
     
 }
-div{
+#tiltTest{
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;

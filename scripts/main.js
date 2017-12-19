@@ -18,6 +18,17 @@ document.body.appendChild(app.view)
 const canvas =  document.querySelector("canvas")
 
 //LUCAS
+
+//DEPTH MANAGING
+
+app.stage.displayList = new PIXI.DisplayList()
+const secondPlan = new PIXI.display.Group(0,true)
+const premierPlan = new PIXI.display.Group(1,true)
+app.stage = new PIXI.display.Stage()
+app.stage.group.enableSort = true
+app.stage.addChild(new PIXI.display.Layer(premierPlan))
+app.stage.addChild(new PIXI.display.Layer(secondPlan))
+
 //EARTH
 loader
     .add("images/earth.png")
@@ -25,7 +36,10 @@ loader
     .load(setup);
 function setup() {
     let earth = new Sprite(resources["images/earth.png"].texture)
-    earth.x=100;
+    earth.x=100
+    earth.zOrder=5
+    earth.parentGroup=secondPlan
+    console.log(earth)
     let logo = PIXI.Sprite.fromImage('images/logo.png')
     logo.scale.x=0.5
     logo.scale.y=0.5
@@ -67,39 +81,7 @@ const loop = () => {
 }
 loop()
 
-// ;(function ( $ ) {
-//     //Make your content a heroe
-//     $.fn.transformHeroes = function() {
-//         //Variables
-//         var perspective = '500px',
-//         delta = 20,
-//         width = this.width(),
-//         height = this.height(),
-//         midWidth = width / 2,
-//         midHeight = height / 2;
-//         //Events
-//         this.on({
-//             mousemove: function(e) {
-//                 var pos = $(this).offset(),
-//                 cursPosX = e.pageX - pos.left,
-//                 cursPosY = e.pageY - pos.top,
-//                 cursCenterX = midWidth - cursPosX,
-//                 cursCenterY = midHeight - cursPosY;
-  
-//                 $(this).css('transform','perspective(' + perspective + ') rotateX('+ (cursCenterY / delta) +'deg) rotateY('+ -(cursCenterX / delta) +'deg)');
-//                 $(this).removeClass('is-out');
-//             },
-//             mouseleave: function() {
-//                 $(this).addClass('is-out');
-//             }
-//         });
-//         //Return
-//         return this;
-//     };
-//   }( jQuery ));
-  
-//   //Set plugin on cards
-//   $('.card').transformHeroes();
+
 
 
 const menuLaunch = () => {
@@ -117,8 +99,23 @@ const menuLaunch = () => {
         }  
     }   
     starSet()
-    const menuSet = () => {   
+    const menuSet = () => {  
+        const drawRing = (name,thickness,color,x,y,radius,depth) => {
+            name = new PIXI.Graphics()
+            name.lineStyle(thickness, color)
+            name.drawCircle(x, y, radius)
+            name.parentGroup=name.depth
+            name.endFill()
+            app.stage.addChild(name)
+            console.log(name)
+
+        }
+        drawRing("earthSelec",4,"0xFFFFFF",900,600,50,"premierPlan")
+        
+        
     }
+    menuSet()
+
 } 
 menuLaunch()
 //FIN LUCAS
