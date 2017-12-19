@@ -58,7 +58,6 @@ function setup() {
 
 function setupIni() {
 
-    console.log("Jeej");
     if(buildingName == "HeadQuarters"){
         sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
         app.stage.addChild(sprite);
