@@ -1,12 +1,9 @@
 let buildingName = "headQuarters";
-const $green = document.querySelector('.green')
-const $red = document.querySelector('.red')
-const $yellow = document.querySelector('.yellow')
 
 let Application = PIXI.Application,
-loader = PIXI.loader,
-resources = PIXI.loader.resources,
-Sprite = PIXI.Sprite;
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    Sprite = PIXI.Sprite;
 
 //Create a Pixi Application
 let app = new PIXI.Application({
@@ -20,7 +17,8 @@ let app = new PIXI.Application({
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
-const canvasBuilder = document.querySelector('canvas')
+const canvasBuilder = document.querySelector('canvas');
+
 
 app.renderer.backgroundColor = 0xc1440e;
 app.renderer.view.style.position = "absolute";
@@ -29,6 +27,7 @@ app.renderer.autoResize = true;
 app.renderer.resize(window.innerWidth, window.innerHeight)
 
 PIXI.loader
+.add("map", "images/map.png")
 .add("headQuarters", "images/headquarters.png")
 .add("D3Printer", "images/3DPrinter.png")
 .add("solarTurbine", "images/solarTurbine.png")
@@ -37,6 +36,10 @@ PIXI.loader
 .add("battery", "images/battery.png")
 .add("houses", "images/houses.png")
 .add("drill", "images/drill.png")
+.add("sickBay", "images/sickBay.png")
+.add("launchingRamp", "images/launchingRamp.png")
+.add("leindenfrostTurbine", "images/leindenfrostTurbine.png")
+.add("sportsHall", "images/sportsHall.png")
 
 .load(setupIni);
 
@@ -88,13 +91,36 @@ function setup() {
         sprite.x = coordX;
         sprite.y = coordY;
         app.stage.addChild(sprite);
+    }else if(buildingName == "sickBay"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.sickBay.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "launchingRamp"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.launchingRamp.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "leindenfrostTurbine"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.leindenfrostTurbine.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "sportsHall"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.sportsHall.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
     }
 }
 
 function setupIni() {
+
     const coordX = (canvasBuilder.width / 2 - (canvasBuilder.width / 2 % 100)) / 100;
     const coordY = (canvasBuilder.height / 2 - (canvasBuilder.height / 2 % 100)) / 100;
     console.log("Jeej");
+    sprite = new PIXI.Sprite(PIXI.loader.resources.map.texture);
+    app.stage.addChild(sprite);
     sprite = new PIXI.Sprite(PIXI.loader.resources.headQuarters.texture);
     sprite.x = coordX * 100;
     sprite.y = coordY * 100;
@@ -121,16 +147,10 @@ let energy = 100,
 let grid = new Array(30);
 let selection = true;
 
-for (let i = 0; i < 31; i++){
+for (let i = 0; i < grid.length; i++){
     grid[i] = [i*100];
-    for(let j = 0; j < 31; j++){
+    for(let j = 0; j < grid.length; j++){
         grid[i][j] = [i*100, j*100, 0];
-    if(buildingName == "HeadQuarters"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.HeadQuarters.texture);
-        app.stage.addChild(sprite);
-    }else if(buildingName == "Farm"){
-        sprite = new PIXI.Sprite(PIXI.loader.resources.Farm.texture);
-        app.stage.addChild(sprite);
     }
 }
 
@@ -140,7 +160,7 @@ canvasBuilder.addEventListener(
     'mousemove',
     (e) =>{
         sprite.x = e.clientX - (e.clientX % 100);
-        sprite.y = e.clientY - (e.clientY % 100) - 100;
+        sprite.y = e.clientY - (e.clientY % 100);
     }
 )
 
@@ -150,7 +170,7 @@ canvasBuilder.addEventListener(
     'click',
     (e) =>{
         const coordX = ((e.clientX - (e.clientX % 100)) / 100);
-        const coordY = ((e.clientY - (e.clientY % 100) - 100) / 100);
+        const coordY = ((e.clientY - (e.clientY % 100)) / 100);
         if((grid[coordX][coordY][2] == 0) && (selection == false)){
             setup();
             grid[coordX][coordY][2] = buildingName;
@@ -179,18 +199,31 @@ document.addEventListener(
 const actualFood = document.querySelector('.food');
 const actualPilgrims = document.querySelector('.pilgrims');
 
-// Food Consumption
+// Food Consumption & Production
+
 setInterval(
     ()=>{
-        food -= 0.05 * pilgrims;
+        let production = 0;
+        for(let i = 0; i < grid.length; i++){
+            for(let j = 0; j < grid.length; j++){
+                if(grid[i][j][2] == "greenhouse"){
+                    production++;
+                }
+            }
+        }
+        food -= 0.05 * pilgrims - (production * 0.6);
+        console.log((Math.random()*100) < 2);
         if(food < 0){
             food = 0;
-        }   
+        }else if(food > maxFood){
+            food = maxFood;
+        }
     },
     1000
 );
 
 //  Death by Starvation
+
 setInterval(
     ()=>{
         if(food <= 0){
@@ -209,42 +242,27 @@ setInterval(
     100
 );
 
-// Building Selection
+// Building Selection from DOM
 
-$green.addEventListener('click', (event)=>
-{
-    buildingName = buildings[0].gameName;
-    console.log(buildingName);
-    app.stage.removeChild(sprite);
-    setup();
-    selection = false;
+const buildingButtons = document.querySelectorAll('.buildingsButtons');
 
-})
+for(let i = 0; i < buildingButtons.length; i++){
+    buildingButtons[i].addEventListener(
+        'click',
+        (event)=> {
+            buildingName = buildings[i + 1].gameName;
+            console.log(buildingName);
+            app.stage.removeChild(sprite);
+            setup();
+            selection = false;
+        }
+    )
+}
 
-
-$red.addEventListener('click', (event)=>
-{
-    buildingName = buildings[1].gameName;
-    app.stage.removeChild(sprite);
-    setup();
-    selection = false;
-    console.log(buildingName);
-})
-
-
-$yellow.addEventListener('click', (event)=>
-{
-    buildingName = buildings[4].gameName;
-    app.stage.removeChild(sprite);
-    setup();
-    selection = false;
-    console.log(buildingName);   
-})
-
-//Buildings stats
+//Buildings objects stats
 
 const headQuarters = {
-    name: "HeadQuarters",
+    name: "HeadQuarter",
     gameName: "headQuarters",
     description: "",
     materialsPrice: 0,
@@ -325,7 +343,7 @@ const greenhouse = {
 
 const sulfurFactory = {
     name: "Sulfur Factory",
-    gameName: "",
+    gameName: "sulfurFactory",
     description: "",
     materialsPrice: 25,
     materialsProduction: 5,
@@ -373,7 +391,7 @@ const battery = {
 
 const warehouse = {
     name: "Warehouse",
-    gameName: "",
+    gameName: "warehouse",
     description: "",
     materialsPrice: 150,
     materialsProduction: 0,
@@ -389,7 +407,7 @@ const warehouse = {
 
 const launchingRamp = {
     name: "Launching ramp",
-    gameName: "",
+    gameName: "launchingRamp",
     description: "",
     materialsPrice: 150,
     materialsProduction: 0,
@@ -421,7 +439,7 @@ const houses = {
 
 const sickBay = {
     name: "Sick Bay",
-    gameName: "",
+    gameName: "sickBay",
     description: "",
     materialsPrice: 40,
     materialsProduction: 0,
@@ -437,7 +455,7 @@ const sickBay = {
 
 const sportsHall = {
     name: "Sports Hall",
-    gameName: "",
+    gameName: "sportsHall",
     description: "",
     materialsPrice: 100,
     materialsProduction: 0,
@@ -453,7 +471,7 @@ const sportsHall = {
 
 const leindenfrostTurbine = {
     name: "Leindenfrost Turbine",
-    gameName: "",
+    gameName: "leindenfrostTurbine",
     description: "",
     materialsPrice: 300,
     materialsProduction: 0,
