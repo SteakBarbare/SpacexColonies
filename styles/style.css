@@ -18,21 +18,38 @@ body{
     height: 100%;
     margin: 0;
     position: relative;
+    cursor: pointer;
 }
 
 /* Styles of visual in the menu bar */
 .container .menu .buildingsList .buildingsButtons img{
     border: 2px solid black;
-    width: 100%;
     height: 100%;
 }
 /* Style of every descriptions of buttons in the menu games */
 .container .menu .buildingsList .buildingsButtons .description{
     background: black;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 500%;
+    height: 200%;
     opacity: 0;
+}
+/* CHange padding of buttons to make them have the same width as the other */
+.container .menu .buildingsList .buildingsButtons.silo img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.battery img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.warehouse img{
+    padding-left: 12px;
+    padding-right: 12px;
 }
 /* Place the description over its associate button */
 .container .menu .buildingsList .buildingsButtons.threeDPrinter .description.threeDPrinter{
@@ -182,4 +199,98 @@ body{
 /* Change the opacity of the description to make it appear on hover */
 .container .menu .buildingsList .buildingsButtons.oilSlickDrill:hover .description.oilSlickDrill{
     opacity: 0.8;
+}
+
+/* Style of the texts insides descriptions elements */
+.container .menu .buildingsList .buildingsButtons .description{
+    color: white;
+    font-size: 16px;
+}
+
+@media (max-width: 1440px){
+    .container .menu .buildingsList{
+        position: absolute;
+        background: lightblue;
+        width: 100%;
+        height: 7%;
+        top: 93%;
+        z-index: 1;
+        font-size: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: black;
+        position: absolute;
+        width: 650%;
+        height: 300%;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 1010px){
+    .container .menu .buildingsList{
+        position: absolute;
+        background: lightblue;
+        width: 100%;
+        height: 5%;
+        top: 95%;
+        z-index: 1;
+        font-size: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: black;
+        position: absolute;
+        width: 750%;
+        height: 400%;
+        opacity: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        color: white;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 730px){
+    .container .menu .buildingsList{
+        position: absolute;
+        background: lightblue;
+        width: 100%;
+        height: 4%;
+        top: 96%;
+        z-index: 1;
+        font-size: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: black;
+        position: absolute;
+        width: 850%;
+        height: 500%;
+        opacity: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        color: white;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 590px){
+    .container .menu .buildingsList{
+        position: absolute;
+        background: lightblue;
+        width: 100%;
+        height: 3%;
+        top: 97%;
+        z-index: 1;
+        font-size: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: black;
+        position: absolute;
+        width: 950%;
+        height: 600%;
+        opacity: 0;
+    }
+    .container .menu .buildingsList .buildingsButtons .description{
+        color: white;
+        font-size: 12px;
+    }
 }
