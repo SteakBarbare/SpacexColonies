@@ -15,19 +15,13 @@ let app = new Application({
 })
 app.renderer.autoResize = true;
 document.body.appendChild(app.view)
+
 const canvas =  document.querySelector("canvas")
 
 //LUCAS
 
 //DEPTH MANAGING
 
-app.stage.displayList = new PIXI.DisplayList()
-const secondPlan = new PIXI.display.Group(0,true)
-const premierPlan = new PIXI.display.Group(1,true)
-app.stage = new PIXI.display.Stage()
-app.stage.group.enableSort = true
-app.stage.addChild(new PIXI.display.Layer(premierPlan))
-app.stage.addChild(new PIXI.display.Layer(secondPlan))
 
 //EARTH
 loader
@@ -37,8 +31,6 @@ loader
 function setup() {
     let earth = new Sprite(resources["images/earth.png"].texture)
     earth.x=100
-    earth.zOrder=5
-    earth.parentGroup=secondPlan
     console.log(earth)
     let logo = PIXI.Sprite.fromImage('images/logo.png')
     logo.scale.x=0.5
@@ -50,7 +42,7 @@ function setup() {
     
 }
 
-//PARRALAX
+//TILT
 const tiltCanv = (elem) => {
     const presp="500px",
     width=elem.offsetWidth,
@@ -100,17 +92,56 @@ const menuLaunch = () => {
     }   
     starSet()
     const menuSet = () => {  
-        const drawRing = (name,thickness,color,x,y,radius,depth) => {
+        const drawRing = (name,thickness,color,x,y,radius) => {
             name = new PIXI.Graphics()
             name.lineStyle(thickness, color)
             name.drawCircle(x, y, radius)
-            name.parentGroup=name.depth
             name.endFill()
             app.stage.addChild(name)
             console.log(name)
 
         }
-        drawRing("earthSelec",4,"0xFFFFFF",900,600,50,"premierPlan")
+        const earthArea = document.querySelector(".earthArea")
+        earthArea.style.top = "80%"
+        earthArea.style.left= "80%"
+
+        
+        const organicCircle = (elem) => {
+            document.addEventListener("mousemove",(event) => {
+                cursorX = event.clientX,
+                cursorY = event.clientY,
+                posELemX = elem.offsetLeft,
+                posELemY = elem.offsetTop,
+                xRatio=posELemX - cursorX,
+                yRatio=posELemY - cursorY
+                console.log(xRatio,yRatio)
+                // const circleAttractFar = (elem) => {
+                //     const tendX = xRatio-15
+                //     const tendY = yRatio-15
+                //     elem.style.transform="translate3d(-"+tendX+"px,-"+tendY+"px,0)"
+                //     console.log(elem.style.transform)
+                // }
+                
+                if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
+                    elem.style.animation="expend 0.2s both"
+                
+                }
+                
+                else if(xRatio <100 && yRatio<100){
+                    elem.style.animation=""
+                    // circleAttractFar(elem)
+                    
+                }
+                else{
+                
+                    elem.style.animation="pulse 3s infinite"
+                }
+
+            })
+        }
+        organicCircle(earthArea)
+
+        
         
         
     }
