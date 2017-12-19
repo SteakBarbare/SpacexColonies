@@ -7,8 +7,8 @@ let Application = PIXI.Application,
 
 //Create a Pixi Application
 let app = new PIXI.Application({
-    width: 3000,
-    height: 3000,
+    width: 1920,
+    height: 1080,
     antialias: true, 
     transparent: false, 
     resolution: 1,
@@ -151,8 +151,8 @@ function setupIni() {
 
 // Ressources
 
-let energy = 100,
-    maxEnergy = 100,
+let energy = 150,
+    maxEnergy = 150,
     materials = 100,
     maxMaterials = 100,
     pilgrims = 20,
@@ -189,9 +189,35 @@ canvasBuilder.addEventListener(
     (e) =>{
         const coordX = ((e.clientX - (e.clientX % 100)) / 100);
         const coordY = ((e.clientY - (e.clientY % 100)) / 100);
+        let conditions = true;
         if((grid[coordX][coordY][2] == 0) && (selection == false)){
-            setup();
-            grid[coordX][coordY][2] = buildingName;
+            for(let i = 1; i < buildings.length; i++){
+                if(buildings[i].gameName == buildingName){
+                    for(let j = 0; j < buildings[i].condition.length; j++){
+                        let bool = false;
+                        for(let fuuf = 0; fuuf < grid.length; fuuf++){
+                            for(let jeej = 0; jeej < grid.length; jeej++){
+                                if(grid[fuuf][jeej][2] == buildings[i].condition[j]){
+                                    bool = true;
+                                }
+                            }
+                        }
+                        if(bool == false){
+                            conditions = false;
+                        }
+                    }
+                    if(conditions == true){
+                        if((materials >= buildings[i].materialsPrice) && (energy >= buildings[i].energyPrice)){
+                            materials -= buildings[i].materialsPrice;
+                            energy -= buildings[i].energyPrice
+                            setup();
+                            grid[coordX][coordY][2] = buildingName;
+                        }
+                    }else{
+                        window.alert(`Ce bâtiment demande au préalable la construction de: ${buildings[i].condition}`);
+                    }
+                }
+            }     
         }else{
             app.stage.removeChild(sprite);
             console.log(grid[coordX][coordY][2]);
@@ -230,10 +256,114 @@ setInterval(
             }
         }
         food -= 0.05 * pilgrims - (production * 0.6);
+// Ressources Consumption & Production
+
+setInterval(
+    ()=>{
+        //  Buildings
+        let greenH = 0;
+            hydro = 0,
+            printer = 0,
+            generator = 0,
+            factory = 0,
+            energyStock = 0,
+            wareH = 0,
+            habitations = 0,
+            sickB = 0,
+            sport = 0,
+            leiden = 0,
+            fuelDrill = 0,
+            launcher = 0;
+
+        //  Food Production/Depletion
+
+        //  Searching through the grid for food buildings
+        for(let i = 0; i < grid.length; i++){
+            for(let j = 0; j < grid.length; j++){
+                if(grid[i][j][2] == "greenhouse"){
+                    greenH++;
+                }else if(grid[i][j][2] == "hydroOxygenComplex"){
+                    hydro++
+                }
+            }
+        }
+
+        // Food update 
+        food -= 0.05 * pilgrims - (greenH * 0.6) - (hydro * 0.1);
         if(food < 0){
             food = 0;
         }else if(food > maxFood){
             food = maxFood;
+        }
+
+
+        //  Energy Production/Depletion
+
+        greenH = 0;
+        hydro = 0;
+
+        //  Searching through the grid for energy buildings
+        for(let i = 0; i < grid.length; i++){
+            for(let j = 0; j < grid.length; j++){
+                if(grid[i][j][2] == "greenhouse"){
+                    greenH++;
+                }else if(grid[i][j][2] == "hydroOxygenComplex"){
+                    hydro++
+                }else if(grid[i][j][2] == "D3Printer"){
+                    printer++
+                }else if(grid[i][j][2] == "solarTurbine"){
+                    generator++
+                }else if(grid[i][j][2] == "sulfurFactory"){
+                    factory++
+                }else if(grid[i][j][2] == "battery"){
+                    energyStock++
+                }else if(grid[i][j][2] == "warehouse"){
+                    wareH++
+                }else if(grid[i][j][2] == "houses"){
+                    habitations++
+                }else if(grid[i][j][2] == "sickBay"){
+                    sickB++
+                }else if(grid[i][j][2] == "sportsHall"){
+                    sport++
+                }else if(grid[i][j][2] == "leindenfrostTurbine"){
+                    leiden++
+                }else if(grid[i][j][2] == "drill"){
+                    fuelDrill++
+                }else if(grid[i][j][2] == "launchingRamp"){
+                    launcher++
+                }
+            }
+        }
+
+        // Energy update 
+        energy -= -5 + (printer * 5) - (generator * 30) + (hydro * 5) + (greenH * 5) + (factory * 5) + (energyStock *5 ) + (wareH * 5) + (habitations * 8) + (sickB * 15) + (sport * 20) - (leiden * 200) + (fuelDrill * 100) + (launcher * 50);
+        
+        if(energy < 0){
+            energy = 0;
+        }else if(energy > maxEnergy){
+            energy = maxEnergy;
+        }
+        
+        //  Materials Production/Depletion
+
+        factory = 0;
+
+        //  Searching through the grid for energy buildings
+        for(let i = 0; i < grid.length; i++){
+            for(let j = 0; j < grid.length; j++){
+                if(grid[i][j][2] == "sulfurFactory"){
+                    factory++
+                }
+            }
+        }
+
+        // Energy update 
+        materials += 0.5 + (factory * 1);
+        
+        if(materials < 0){
+            materials = 0;
+        }else if(materials > maxMaterials){
+            materials = maxMaterials;
         }
     },
     1000
@@ -253,8 +383,10 @@ setInterval(
 // Notifications
 setInterval(
     ()=>{
-        actualFood.innerHTML = `Food Left: ${Math.trunc(food)}`; 
-        actualPilgrims.innerHTML = `Pilgrims Alive: ${pilgrims}`;
+        console.log(`Food Left: ${Math.trunc(food)}`); 
+        console.log(`Energy left: ${energy}`);
+        console.log(`Materials: ${materials}`);
+        console.log(`Pilgrims Alive: ${pilgrims}`);
     },
     100
 );
@@ -282,6 +414,7 @@ const headQuarters = {
     name: "HeadQuarter",
     gameName: "headQuarters",
     description: "",
+    condition: [],
     materialsPrice: 0,
     materialsProduction: 0,
     materialLimit: 0,
@@ -298,10 +431,11 @@ const threeDPrinter = {
     name: "3D Printer",
     gameName: "D3Printer",
     description: "",
-    materialsPrice: 0,
+    condition: ["headQuarters"],
+    materialsPrice: 10,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 0,
+    energyPrice: 10,
     energyProduction: 0,
     energyUsed: 5,
     energyLimit: 0,
@@ -314,6 +448,7 @@ const hydroOxygenComplex = {
     name: "Hydro-Oxygen Complex",
     gameName: "hydroOxygenComplex",
     description: "",
+    condition: ["headQuarters", "D3Printer"],
     materialsPrice: 25,
     materialsProduction: 0,
     materialLimit: 0,
@@ -330,6 +465,7 @@ const solarTurbine = {
     name: "Solar Turbine",
     gameName: "solarTurbine",
     description: "",
+    condition: ["headQuarters", "D3Printer"],
     materialsPrice: 25,
     materialsProduction: 0,
     materialLimit: 0,
@@ -346,10 +482,11 @@ const greenhouse = {
     name: "Greenhouse",
     gameName: "greenhouse",
     description: "",
+    condition: ["headQuarters", "D3Printer"],
     materialsPrice: 20,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 100,
+    energyPrice: 20,
     energyProduction: 0,
     energyUsed: 10,
     energyLimit: 0,
@@ -362,6 +499,7 @@ const sulfurFactory = {
     name: "Sulfur Factory",
     gameName: "sulfurFactory",
     description: "",
+    condition: ["headQuarters", "D3Printer", "solarTurbine", "greenhouse"],
     materialsPrice: 25,
     materialsProduction: 5,
     materialLimit: 0,
@@ -378,6 +516,7 @@ const silo = {
     name: "Silo",
     gameName: "silo",
     description: "",
+    condition: ["headQuarters", "D3Printer", "greenhouse"],
     materialsPrice: 50,
     materialsProduction: 0,
     materialLimit: 0,
@@ -394,6 +533,7 @@ const battery = {
     name: "Battery",
     gameName: "battery",
     description: "",
+    condition: ["headQuarters", "D3Printer", "solarTurbine"],
     materialsPrice: 200,
     materialsProduction: 0,
     materialLimit: 0,
@@ -410,6 +550,7 @@ const warehouse = {
     name: "Warehouse",
     gameName: "warehouse",
     description: "",
+    condition: ["headQuarters", "D3Printer", "sulfurFactory"],
     materialsPrice: 150,
     materialsProduction: 0,
     materialLimit: 100,
@@ -426,6 +567,7 @@ const launchingRamp = {
     name: "Launching ramp",
     gameName: "launchingRamp",
     description: "",
+    condition: ["headQuarters", "D3Printer", "drill"],
     materialsPrice: 150,
     materialsProduction: 0,
     materialLimit: 0,
@@ -442,6 +584,7 @@ const houses = {
     name: "Houses",
     gameName: "houses",
     description: "",
+    condition: ["headQuarters", "D3Printer", "sulfurFactory"],
     materialsPrice: 35,
     materialsProduction: 0,
     materialLimit: 0,
@@ -458,6 +601,7 @@ const sickBay = {
     name: "Sick Bay",
     gameName: "sickBay",
     description: "",
+    condition: ["headQuarters", "D3Printer", "sulfurFactory", "houses"],
     materialsPrice: 40,
     materialsProduction: 0,
     materialLimit: 0,
@@ -474,6 +618,7 @@ const sportsHall = {
     name: "Sports Hall",
     gameName: "sportsHall",
     description: "",
+    condition: ["headQuarters", "D3Printer", "houses"],
     materialsPrice: 100,
     materialsProduction: 0,
     materialLimit: 0,
@@ -490,6 +635,7 @@ const leindenfrostTurbine = {
     name: "Leindenfrost Turbine",
     gameName: "leindenfrostTurbine",
     description: "",
+    condition: ["headQuarters", "D3Printer", "solarTurbine"],
     materialsPrice: 300,
     materialsProduction: 0,
     materialLimit: 0,
@@ -506,6 +652,7 @@ const oilSlickDrill = {
     name: "Oil Slick Drill",
     gameName: "drill",
     description: "",
+    condition: ["headQuarters", "D3Printer", "houses", "sickBay", "sportsHall"],
     materialsPrice: 800,
     materialsProduction: 0,
     materialLimit: 0,
