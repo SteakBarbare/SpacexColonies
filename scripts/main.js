@@ -1,4 +1,3 @@
-
 //SETUP
 let Application = PIXI.Application,
 loader = PIXI.loader,
@@ -31,18 +30,12 @@ loader
 function setup() {
     let earth = new Sprite(resources["images/earth.png"].texture)
     earth.x=100
-    console.log(earth)
-    let logo = PIXI.Sprite.fromImage('images/logo.png')
-    logo.scale.x=0.5
-    logo.scale.y=0.5
-    logo.x=200
-    logo.y=100
-    app.stage.addChild(logo)
     app.stage.addChild(earth)
     
 }
 
 //TILT
+
 const tiltCanv = (elem) => {
     const presp="500px",
     width=elem.offsetWidth,
@@ -69,7 +62,8 @@ const tiltCanv = (elem) => {
 }
 const loop = () => {
     window.requestAnimationFrame(loop)
-    tiltCanv(document.querySelector("div"))
+    tiltCanv(document.querySelector("#tiltTest"))
+    
 }
 loop()
 
@@ -77,6 +71,7 @@ loop()
 
 
 const menuLaunch = () => {
+    //variable
     const starSet = () => {
         //CREATE PARTICLES
         for(i=0;i<2000;i++){    
@@ -98,7 +93,7 @@ const menuLaunch = () => {
             name.drawCircle(x, y, radius)
             name.endFill()
             app.stage.addChild(name)
-            console.log(name)
+            
 
         }
         const earthArea = document.querySelector(".earthArea")
@@ -114,7 +109,7 @@ const menuLaunch = () => {
                 posELemY = elem.offsetTop,
                 xRatio=posELemX - cursorX,
                 yRatio=posELemY - cursorY
-                console.log(xRatio,yRatio)
+                
                 // const circleAttractFar = (elem) => {
                 //     const tendX = xRatio-15
                 //     const tendY = yRatio-15
@@ -124,6 +119,8 @@ const menuLaunch = () => {
                 
                 if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
                     elem.style.animation="expend 0.2s both"
+                    elem.style.backgroundImage="url('images/x.png')"
+                
                 
                 }
                 
@@ -133,8 +130,8 @@ const menuLaunch = () => {
                     
                 }
                 else{
-                
                     elem.style.animation="pulse 3s infinite"
+                    elem.style.backgroundImage=""
                 }
 
             })

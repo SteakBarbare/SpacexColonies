@@ -7,8 +7,9 @@ div,canvas{
     transform-style: preserve-3d;
     transition-duration: 0.1s;
     
+    
 }
-#tiltTest{
+.homePage #tiltTest{
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
@@ -18,7 +19,7 @@ div,canvas{
     top:calc(50% - 50px);
     left:calc(50% - 50px);
 }
-.selecArea{
+.homePage .selecArea{
     height: 70px;
     width: 70px;
     position: absolute;
@@ -30,9 +31,16 @@ div,canvas{
     animation-direction: reverse;
     animation-timing-function: cubic-bezier(.41,.38,.17,.87);
     transition-duration: 1s;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+.homePage .logoTitle{
+    position: absolute;
+    z-index: 2;
+    perspective: 300px;
     
 }
-.selecArea:hover{
+.homePage .selecArea:hover{
     cursor: pointer;
 }
 @keyframes pulse {
