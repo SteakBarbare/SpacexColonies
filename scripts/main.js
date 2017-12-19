@@ -1,78 +1,8 @@
-// const mouse = {x: 0, y: 0}
-// console.log(mouse.x, mouse.y)
-// //Saving mouse coordinates during mouse move
-// document.addEventListener('mousemove',(event) =>{
-//     mouse.x = event.clientX
-//     mouse.y = event.clientY
-// })
-
-// //Create a Pixi Application
-// let app = new PIXI.Application({ 
-//     width: 3000, 
-//     height: 3000,                       
-//     antialias: true, 
-//     transparent: false, 
-//     resolution: 1,
-//     forceCanvas: true,
-//   }
-// )
-
-// //Add the canvas that Pixi automatically created for you to the HTML document
-// document.body.appendChild(app.view)
-
-// //load an image and run the `setup` function when it's done
-// PIXI.loader
-//   .add("images/cat.png")
-//   .load(setup)
-//     let cat;
-// //This `setup` function will run when the image has loaded
-// function setup() {
-    //   //Create the cat sprite
-    //   cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture)
-//   //Add the cat to the stage
-//   app.stage.addChild(cat)
-// }
-
-// document.addEventListener('mousemove', (event) => {
-    //     cat.x = mouse.x - (cat.width/2)
-    //     cat.y = mouse.y - (cat.height/2)
-// })
-
-// document.addEventListener('click', (event) => {
-    //     setup()
-    // })
-    
-    //Type of buildings Array
 const buildings = ["HeadQuarters", "Farm", "EnergyGenerator"]
 let buildingName = "HeadQuarters";
 const $green = document.querySelector('.green')
 const $red = document.querySelector('.red')
 const $yellow = document.querySelector('.yellow')
-
-
-$green.addEventListener('click', (event)=>
-{
-    buildingName = buildings[0]
-    app.stage.removeChild(sprite);
-    setup();
-    console.log(buildingName)
-})
-
-
-$red.addEventListener('click', (event)=>
-{
-    buildingName = buildings[1]
-    app.stage.removeChild(sprite);
-    setup();
-    console.log(buildingName)
-})
-
-
-$yellow.addEventListener('click', (event)=>
-{
-    buildingName = buildings[2]
-    console.log(buildingName)    
-})
 
 let Application = PIXI.Application,
 loader = PIXI.loader,
@@ -99,15 +29,16 @@ app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
 app.renderer.resize(window.innerWidth, window.innerHeight)
 
-
-
 PIXI.loader
 .add("HeadQuarters", "images/QG.png")
 .add("Farm", "images/cat.png")
 .add("Pute", "images/testSprites/1.png")
 .load(setupIni);
 
+// Sprite Création
+
 let sprite;
+
 function setup() {
     const coordX = sprite.x;
     const coordY = sprite.y;
@@ -124,6 +55,7 @@ function setup() {
         app.stage.addChild(sprite);
     }
 }
+
 function setupIni() {
 
     console.log("Jeej");
@@ -136,17 +68,49 @@ function setupIni() {
     }
 }
 
+// Building Selection
+
+$green.addEventListener('click', (event)=>
+{
+    buildingName = buildings[0]
+    app.stage.removeChild(sprite);
+    setup();
+    selection = false;
+    console.log(buildingName)
+})
+
+
+$red.addEventListener('click', (event)=>
+{
+    buildingName = buildings[1]
+    app.stage.removeChild(sprite);
+    setup();
+    selection = false;
+    console.log(buildingName)
+})
+
+
+$yellow.addEventListener('click', (event)=>
+{
+    buildingName = buildings[2]
+    console.log(buildingName)    
+})
 
 // Ressources
 
-let energy = 0,
-materials = 0,
-pilgrims = 20,
-food = 10;
+let energy = 100,
+    maxEnergy = 100,
+    materials = 100,
+    maxMaterials = 100,
+    pilgrims = 20,
+    maxPilgrims = 20,
+    food = 100,
+    maxFood = 100;
 
 // Grid Ini
 
 let grid = new Array(30);
+let selection = true;
 
 for (let i = 0; i < 31; i++){
     grid[i] = [i*100];
@@ -156,7 +120,6 @@ for (let i = 0; i < 31; i++){
 }
 
 // Construction Previz
-
 
 canvasBuilder.addEventListener(
     'mousemove',
@@ -173,11 +136,25 @@ canvasBuilder.addEventListener(
     (e) =>{
         const coordX = ((e.clientX - (e.clientX % 100)) / 100);
         const coordY = ((e.clientY - (e.clientY % 100) - 100) / 100);
-        if(grid[coordX][coordY][2] == 0){
+        if((grid[coordX][coordY][2] == 0) && (selection == false)){
             setup();
-            grid[coordX][coordY][2] = 1
+            grid[coordX][coordY][2] = buildingName;
         }else{
-            console.log('Pute');
+            app.stage.removeChild(sprite);
+            console.log(grid[coordX][coordY][2]);
+            selection = true;
+        }
+    }
+)
+
+// Selection mode
+
+document.addEventListener(
+    'keydown',
+    (e) =>{
+        if(e.keyCode == 27){
+            app.stage.removeChild(sprite);
+            selection = true;
         }
     }
 )
@@ -187,6 +164,7 @@ canvasBuilder.addEventListener(
 const actualFood = document.querySelector('.food');
 const actualPilgrims = document.querySelector('.pilgrims');
 
+// Food Consumption
 setInterval(
     ()=>{
         food -= 0.05 * pilgrims;
@@ -197,15 +175,7 @@ setInterval(
     1000
 );
 
-setInterval(
-    ()=>{
-        actualFood.innerHTML = `Food Left: ${Math.trunc(food)}`; 
-        actualPilgrims.innerHTML = `Pilgrims Alive: ${pilgrims}`;
-    },
-    100
-);
-
-
+//  Death by Starvation
 setInterval(
     ()=>{
         if(food <= 0){
@@ -213,4 +183,13 @@ setInterval(
         }
     },
     5000
+);
+
+// Notifications
+setInterval(
+    ()=>{
+        actualFood.innerHTML = `Food Left: ${Math.trunc(food)}`; 
+        actualPilgrims.innerHTML = `Pilgrims Alive: ${pilgrims}`;
+    },
+    100
 );
