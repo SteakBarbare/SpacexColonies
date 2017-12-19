@@ -40,6 +40,9 @@ PIXI.loader
 .add("launchingRamp", "images/launchingRamp.png")
 .add("leindenfrostTurbine", "images/leindenfrostTurbine.png")
 .add("sportsHall", "images/sportsHall.png")
+.add("sulfurFactory", "images/sulfurFactory.png")
+.add("warehouse", "images/warehouse.png")
+.add("hydroOxygenComplex", "images/hydroOxygenComplex.png")
 
 .load(setupIni);
 
@@ -108,6 +111,21 @@ function setup() {
         app.stage.addChild(sprite);
     }else if(buildingName == "sportsHall"){
         sprite = new PIXI.Sprite(PIXI.loader.resources.sportsHall.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "sulfurFactory"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.sulfurFactory.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "warehouse"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.warehouse.texture);
+        sprite.x = coordX;
+        sprite.y = coordY;
+        app.stage.addChild(sprite);
+    }else if(buildingName == "hydroOxygenComplex"){
+        sprite = new PIXI.Sprite(PIXI.loader.resources.hydroOxygenComplex.texture);
         sprite.x = coordX;
         sprite.y = coordY;
         app.stage.addChild(sprite);
@@ -212,7 +230,6 @@ setInterval(
             }
         }
         food -= 0.05 * pilgrims - (production * 0.6);
-        console.log((Math.random()*100) < 2);
         if(food < 0){
             food = 0;
         }else if(food > maxFood){
