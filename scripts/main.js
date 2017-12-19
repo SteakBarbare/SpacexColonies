@@ -37,26 +37,33 @@ function setup() {
 }
 
 //PARRALAX
-const tiltCanv = () => {
+const tiltCanv = (elem) => {
     const presp="500px",
-    width=canvas.offsetWidth,
-    height=canvas.offsetHeight,
+    width=elem.offsetWidth,
+    height=elem.offsetHeight,
     midWidth=width / 2,
     midHeight=height / 2
 
     document.addEventListener("mousemove",(event) => {
-        const posTop = canvas.offsetTop,
-        posLeft = canvas.offsetLeft,
+        const posTop = elem.offsetTop,
+        posLeft = elem.offsetLeft,
+        perspective="500px",
         cursorX = event.offsetX - posLeft,
-        cursorY = event.offsetY - posTop
-        console.log(cursorX,cursorY)
-        
+        cursorY = event.offsetY - posTop,
+        cursorCenterX = midWidth - cursorX,
+        cursorCenterY = midHeight - cursorY,
+        angle=20
+        elem.style.transform='perspective(' + perspective + ') rotateX('+(cursorCenterY / angle) +'deg) rotateY('+ -(cursorCenterX / angle) + 'deg)';
+        elem.classList.remove("isOut") 
+    })
+    document.addEventListener("mousemove",(event) => {
+        elem.classList.add("isOut")
     })
 
 }
 const loop = () => {
     window.requestAnimationFrame(loop)
-    tiltCanv()
+    tiltCanv(document.querySelector("div"))
 }
 loop()
 
