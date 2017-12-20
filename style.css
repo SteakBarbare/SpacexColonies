@@ -1,0 +1,591 @@
+body{
+    overflow:hidden;
+    font-size: 0;
+}
+/*****************************
+
+            Pop-Up
+
+******************************/
+.container .popUp{
+    background: rgb(35, 35, 35);
+    border: 7px solid rgb(0, 0, 0);
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 60%;
+    height: 42%;
+    top: 30%;
+    left: 25%;
+    border-radius: 12px;
+    display: none;
+}
+
+.container .popUp .popUpH1{
+    color: white;
+    font-size: 60px;
+    padding-bottom: 20px;
+}
+
+.container .popUp .popUpParagraph{
+    color: white;
+    font-size: 20px;
+    padding: 0 8%;
+}
+
+.container .popUp .lastParagraph{
+    margin-bottom: 5%;
+}
+
+.container .popUp .okButton{
+    color: rgb(255, 255, 255);
+    background: rgb(100, 100, 100);
+    border: 2px solid white;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 26px;
+    transition: background 0.2s ease-in;
+    cursor: pointer;
+}
+
+.container .popUp .okButton:hover {
+    background: rgb(65, 65, 65);
+}
+
+
+/*****************************
+
+            Ressources
+
+******************************/
+/* Style of the ressource bar during the game */
+.container .ressourcesBar{
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    margin-top:1%;
+}
+/* Style of the ressource containers during the game */
+.container .ressourcesBar .ressource{
+    display: inline-block;
+    color: rgb(255, 255, 255); 
+    height: 100%;
+    font-size: 25px;
+    margin-left: 80px;
+    text-align: center;
+}
+
+/* Style of the ressources logos */
+.container .ressourcesBar .logo{
+    width: 20%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+/* Ressources logos img */
+.container .ressourcesBar .ressource img{
+    display: inline-block;
+    height: 98%;
+    width: 98%;
+}
+
+/* Style gauges */
+.container .ressourcesBar .ressource .gauge{
+    display: inline-block;
+    position: relative;
+    width: 250px;
+    height: 95%;
+    background: rgb(35, 35, 35);
+    border: 2px solid black;
+}
+/* Filler of the gauges */
+.container .ressourcesBar .ressource .gauge .gaugeFiller{
+    width: 100%;
+    height: 100%;
+}
+/* Population number  */
+.container .ressourcesBar .ressource span.populationNumber{
+    vertical-align: super;
+    padding-left: 10px;
+    padding-right: 0;
+}
+/* Numbers inside the gauge */
+.container .ressourcesBar .ressource .stocksValue{
+    position: absolute;
+    left: 15%;
+    top: 25%;
+    padding: 0;
+}
+/* Alignement of production after the gauges */
+.container .ressourcesBar .ressource .gauge span{
+    position: absolute;
+    left: 60%;
+    top: 25%;
+}
+/* Background of population ressource*/
+.container .ressourcesBar .ressource.population{
+    background: rgb(35, 35, 35);
+    border: 2px solid black;
+}
+
+/* Ressources colors */
+.container .ressourcesBar .ressource.energy .gauge .gaugeFiller{
+    background: #c6c60c;
+}
+.container .ressourcesBar .ressource.food .gauge .gaugeFiller{
+    background: #d66478;
+}
+.container .ressourcesBar .ressource.materials .gauge .gaugeFiller{
+    background: #555453;
+}
+
+/*****************************
+
+         Building menu
+
+******************************/
+/* Style of the menu for buildings constructions during the game */
+.container .menu .buildingsList{
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    top: 90%;
+    z-index: 1;
+    font-size: 0;
+    text-align: center;
+}
+
+/* Styles of buttons menu */
+.container .menu .buildingsList .buildingsButtons{
+    display: inline-block;
+    background: rgb(35, 35, 35);
+    height: 100%;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Styles of visual in the menu bar */
+.container .menu .buildingsList .buildingsButtons img{
+    border: 2px solid black;
+    height: 100%;
+}
+/* Style of every descriptions of buttons in the menu games */
+.container .menu .buildingsList .buildingsButtons .description{
+    background: rgb(35, 35, 35);
+    position: absolute;
+    width: 500%;
+    height: 200%;
+    display: none;
+}
+/* CHange padding of buttons to make them have the same width as the other */
+.container .menu .buildingsList .buildingsButtons.silo img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.battery img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.container .menu .buildingsList .buildingsButtons.warehouse img{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.container .menu .buildingsList .buildingsButtons.sickBay img{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.threeDPrinter .description.threeDPrinter{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.threeDPrinter:hover .description.threeDPrinter{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex .description.hydroOxygenComplex{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex:hover .description.hydroOxygenComplex{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.solarTurbine .description.solarTurbine{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.solarTurbine:hover .description.solarTurbine{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.greenhouse .description.greenhouse{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.greenhouse:hover .description.greenhouse{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.sulfurFactory .description.sulfurFactory{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.sulfurFactory:hover .description.sulfurFactory{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.silo .description.silo{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.silo:hover .description.silo{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.battery .description.battery{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.battery:hover .description.battery{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.drill .description.drill{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.drill:hover .description.drill{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.warehouse .description.warehouse{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.warehouse:hover .description.warehouse{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.lauchingRamp .description.lauchingRamp{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.lauchingRamp:hover .description.lauchingRamp{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.houses .description.houses{
+    left: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.houses:hover .description.houses{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.sickBay .description.sickBay{
+    right: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.sickBay:hover .description.sickBay{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.sportsHall .description.sportsHall{
+    right: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.sportsHall:hover .description.sportsHall{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.leindenfrostTurbine .description.leindenfrostTurbine{
+    right: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.leindenfrostTurbine:hover .description.leindenfrostTurbine{
+    display: block;
+}
+
+/* Place the description over its associate button */
+.container .menu .buildingsList .buildingsButtons.oilSlickDrill .description.oilSlickDrill{
+    right: 0;
+    bottom: 100%;
+}
+/* Change the opacity of the description to make it appear on hover */
+.container .menu .buildingsList .buildingsButtons.oilSlickDrill:hover .description.oilSlickDrill{
+    display: block;
+}
+
+/* Style of the texts insides descriptions elements */
+
+.container .menu .buildingsList .buildingsButtons .description h1{
+    color: rgb(223, 223, 223);
+    font-size: 32px;
+    margin:5px 10px;
+}
+
+.container .menu .buildingsList .buildingsButtons .description span{
+    color: rgb(223, 223, 223);
+    font-size: 22px;
+    margin:5px 10px;
+}
+
+.container .menu .buildingsList .buildingsButtons .description p{
+    color: rgb(223, 223, 223);
+    font-size: 16px;
+    margin:5px 10px;
+}
+
+/*****************************
+
+          Responsive
+
+******************************/
+@media (max-width: 1450px){
+    .container .menu .buildingsList{
+        position: absolute;
+        width: 100%;
+        height: 7%;
+        top: 93%;
+        z-index: 1;
+        font-size: 0;
+    }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: rgb(35, 35, 35);
+        position: absolute;
+        width: 650%;
+        height: 250%;
+        display: none;
+    }
+    .container .menu .buildingsList .buildingsButtons .description h1{
+        color: rgb(223, 223, 223);
+        font-size: 28px;
+        margin:5px 10px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description span{
+        color: rgb(223, 223, 223);
+        font-size: 17px;
+        margin:5px 10px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description p{
+        color: rgb(223, 223, 223);
+        font-size: 14px;
+        margin:5px 10px;
+    }
+}
+
+@media (max-width: 1400px){
+    /* Change the ressource bar on rezise of the window */
+    .container .ressourcesBar{
+        height: 5%;
+        position: absolute;
+        z-index: 1;
+    }
+    /* Style of the elements where the ressources appears */
+    .container .ressourcesBar .ressource{
+        background: rgb(35, 35, 35);
+        color: rgb(223, 223, 223); 
+        height: 100%;
+        font-size: 25px;
+        border: 2px solid black;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    /* Style of image before gauge */
+    .container .ressourcesBar .logo{
+        width: 50px;
+        height: 100%;
+        position: relative;
+        left:0;
+    }
+    /* Style of image before gauge */
+    .container .ressourcesBar .ressource img{
+        display: inline-block;
+        height: 98%;
+        width: 98%;
+        position: relative;
+        left:0;
+    }
+    /* Numbers inside the gauge */
+    .container .ressourcesBar .ressource p{
+        padding-right: 20px;
+        padding-top: 3%;
+        position: relative;
+        left:0;
+    }
+    
+    .container .ressourcesBar .ressource.food{
+        top: 47px;
+    }
+    
+    .container .ressourcesBar .ressource.materials{
+        top: 94px;
+    }
+    
+    .container .ressourcesBar .ressource.population{
+        top: 141px;
+    }
+
+    .container .ressourcesBar .ressource.population{
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 1110px){
+    .container .menu .buildingsList{
+        position: absolute;
+        width: 100%;
+        height: 5%;
+        top: 95%;
+        z-index: 1;
+        font-size: 0;
+    }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: rgb(35, 35, 35);
+        position: absolute;
+        width: 850%;
+        height: 350%;
+        display: none;
+    }
+
+    .container .menu .buildingsList .buildingsButtons .description h1{
+        color: rgb(223, 223, 223);
+        font-size: 26px;
+        margin:5px 10px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description span{
+        color: rgb(223, 223, 223);
+        font-size: 17px;
+        margin:5px 10px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description p{
+        color: rgb(223, 223, 223);
+        font-size: 14px;
+        margin:5px 10px;
+    }
+
+    .container .ressourcesBar .ressource.population{
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 920px){
+    .container .menu .buildingsList{
+        position: absolute;
+        width: 100%;
+        height: 4%;
+        top: 96%;
+        z-index: 1;
+        font-size: 0;
+    }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
+    .container .menu .buildingsList .buildingsButtons .description{
+        background: rgb(35, 35, 35);
+        position: absolute;
+        width: 850%;
+        height: 500%;
+        display: none;
+        padding: 5px;
+    }
+
+    .container .menu .buildingsList .buildingsButtons .description h1{
+        color: rgb(223, 223, 223);
+        font-size: 25px;
+        margin:5px 2px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description span{
+        color: rgb(223, 223, 223);
+        font-size: 16px;
+        margin: 5px 2px;
+    }
+    
+    .container .menu .buildingsList .buildingsButtons .description p{
+        color: rgb(223, 223, 223);
+        font-size: 13px;
+        margin:5px 2px;
+    }
+
+    .container .ressourcesBar .ressource.population{
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
+    }
+    @media (max-width: 900px){
+        .container .toMuchResize{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+            background: rgb(35, 35, 35);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .container .toMuchResize span{
+            position: relative;
+            top: 43%;
+        }
+    }
+}
+
