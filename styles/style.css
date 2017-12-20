@@ -44,7 +44,7 @@ body{
 }
 /* Filler of the gauges */
 .container .ressourcesBar .ressource .gauge .gaugeFiller{
-    width: 50%;
+    width: 100%;
     height: 100%;
     background: rgb(81, 255, 0);
 }

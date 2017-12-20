@@ -159,8 +159,8 @@ let energy = 150,
     maxMaterials = 100,
     pilgrims = 20,
     maxPilgrims = 20,
-    food = 100,
-    maxFood = 100;
+    food = 40,
+    maxFood = 40;
 
 // Grid Ini
 
@@ -275,8 +275,11 @@ document.addEventListener(
 
 // Ressources Depletion
 
-const stocks = document.querySelectorAll('.stocks');
+const stocks = document.querySelectorAll('.stocksValue');
+const stocksPop = document.querySelector('.stocks');
 const prod = document.querySelectorAll('.production');
+const fillerBar = document.querySelectorAll('.gaugeFiller');
+
 
 // Ressources Consumption & Production
 
@@ -284,6 +287,7 @@ setInterval(
     ()=>{
         //  Buildings
         let prodRation = 0,
+            fillBarRatio = 0,
             greenH = 0,
             hydro = 0,
             printer = 0,
@@ -320,12 +324,17 @@ setInterval(
         }else if(food > maxFood){
             food = maxFood;
         }
+        
 
         // Notifications -> Food
 
+        fillBarRatio = (food / maxFood) * 100;
+
         stocks[1].innerHTML = `${Math.trunc(food)} / ${Math.trunc(maxFood)}`;
         prod[1].innerHTML = `${prodRation.toFixed(2)} / s`;
-    
+        fillerBar[1].style.width = `${fillBarRatio}%`;
+        fillerBar[1].style.background = "pink";
+        
 
         //  Energy Production/Depletion
 
@@ -378,8 +387,12 @@ setInterval(
 
         // Notifications -> Energy
 
+        fillBarRatio = (energy / maxEnergy) * 100;
+
         stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)}`;
         prod[0].innerHTML = `${prodRation.toFixed(2)} / s`;
+        fillerBar[0].style.width = `${fillBarRatio}%`;
+        fillerBar[0].style.background = "yellow";
         
         //  Materials Production/Depletion
 
@@ -407,12 +420,16 @@ setInterval(
 
         // Notifications -> Materials
 
+        fillBarRatio = (materials / maxMaterials) * 100;
+
         stocks[2].innerHTML = `${Math.trunc(materials)} / ${Math.trunc(maxMaterials)}`;
         prod[2].innerHTML = `${prodRation.toFixed(2)} / s`;
+        fillerBar[2].style.width = `${fillBarRatio}%`;
+        fillerBar[2].style.background = "gray";
 
         // Notifications -> Population
 
-        stocks[3].innerHTML = Math.round(pilgrims);
+        stocks.innerHTML = Math.round(pilgrims);
 
     },
     1000
@@ -726,6 +743,7 @@ const buildings =[
 ];
 
 // Icon change depending on building disponibility
+
 setInterval(
     () =>{
     let conditions = true;
