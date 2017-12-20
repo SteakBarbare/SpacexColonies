@@ -9,24 +9,23 @@ body{
     position: absolute;
     z-index: 1;
     text-align: center;
+    margin-top:1%;
 }
 
 .container .ressourcesBar .ressource{
     display: inline-block;
-    background: rgb(35, 35, 35);
     color: rgb(223, 223, 223); 
     height: 100%;
     font-size: 25px;
     margin-left: 80px;
-    border: 2px solid black;
     text-align: center;
 }
 
 .container .ressourcesBar .logo{
-    width: 50px;
+    width: 20%;
     height: 100%;
     position: relative;
-    float: left;
+    display: inline-block;
 }
 
 .container .ressourcesBar .ressource img{
@@ -35,12 +34,44 @@ body{
     width: 98%;
 }
 
-.container .ressourcesBar .ressource p{
-    padding-right: 20px;
-    padding-top: 3%;
-    float: left;
+.container .ressourcesBar .ressource .gauge{
+    display: inline-block;
+    position: relative;
+    width: 250px;
+    height: 95%;
+    background: rgb(35, 35, 35);
+    border: 2px solid black;
 }
-
+/* Filler of the gauges */
+.container .ressourcesBar .ressource .gauge .gaugeFiller{
+    width: 50%;
+    height: 100%;
+    background: rgb(81, 255, 0);
+}
+/* Population number  */
+.container .ressourcesBar .ressource span.populationNumber{
+    vertical-align: super;
+    padding-left: 10px;
+    padding-right: 0;
+}
+/* Numbers inside the gauge */
+.container .ressourcesBar .ressource .stocksValue{
+    position: absolute;
+    left: 15%;
+    top: 25%;
+    padding: 0;
+}
+/* Alignement of production after the gauges */
+.container .ressourcesBar .ressource .gauge span{
+    position: absolute;
+    left: 60%;
+    top: 25%;
+}
+/* Background of population ressource*/
+.container .ressourcesBar .ressource.population{
+    background: rgb(35, 35, 35);
+    border: 2px solid black;
+}
 /* Style of the menu for buildings constructions during the game */
 .container .menu .buildingsList{
     position: absolute;
@@ -307,6 +338,66 @@ body{
     }
 }
 
+@media (max-width: 1400px){
+    /* Change the ressource bar on rezise of the window */
+    .container .ressourcesBar{
+        height: 5%;
+        position: absolute;
+        z-index: 1;
+    }
+    /* Style of the elements where the ressources appears */
+    .container .ressourcesBar .ressource{
+        background: rgb(35, 35, 35);
+        color: rgb(223, 223, 223); 
+        height: 100%;
+        font-size: 25px;
+        border: 2px solid black;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    /* Style of image before gauge */
+    .container .ressourcesBar .logo{
+        width: 50px;
+        height: 100%;
+        position: relative;
+        left:0;
+    }
+    /* Style of image before gauge */
+    .container .ressourcesBar .ressource img{
+        display: inline-block;
+        height: 98%;
+        width: 98%;
+        position: relative;
+        left:0;
+    }
+    /* Numbers inside the gauge */
+    .container .ressourcesBar .ressource p{
+        padding-right: 20px;
+        padding-top: 3%;
+        position: relative;
+        left:0;
+    }
+    
+    .container .ressourcesBar .ressource.food{
+        top: 47px;
+    }
+    
+    .container .ressourcesBar .ressource.materials{
+        top: 94px;
+    }
+    
+    .container .ressourcesBar .ressource.population{
+        top: 141px;
+    }
+
+    .container .ressourcesBar .ressource.population{
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
+    }
+}
+
 @media (max-width: 1110px){
     .container .menu .buildingsList{
         position: absolute;
@@ -345,6 +436,12 @@ body{
         color: rgb(223, 223, 223);
         font-size: 14px;
         margin:5px 10px;
+    }
+
+    .container .ressourcesBar .ressource.population{
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
     }
 }
 
@@ -389,56 +486,10 @@ body{
         margin:5px 2px;
     }
 
-    /* Change the ressource bar on rezise of the window */
-    .container .ressourcesBar{
-        height: 5%;
-        position: absolute;
-        z-index: 1;
-    }
-    /* Style of the elements where the ressources appears */
-    .container .ressourcesBar .ressource{
-        background: rgb(35, 35, 35);
-        color: rgb(223, 223, 223); 
-        height: 100%;
-        font-size: 25px;
-        border: 2px solid black;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    .container .ressourcesBar .logo{
-        width: 50px;
-        height: 100%;
-        position: relative;
-        left:0;
-    }
-    
-    .container .ressourcesBar .ressource img{
-        display: inline-block;
-        height: 98%;
-        width: 98%;
-        position: relative;
-        left:0;
-    }
-    
-    .container .ressourcesBar .ressource p{
-        padding-right: 20px;
-        padding-top: 3%;
-        position: relative;
-        left:0;
-    }
-    
-    .container .ressourcesBar .ressource.food{
-        top: 47px;
-    }
-    
-    .container .ressourcesBar .ressource.materials{
-        top: 94px;
-    }
-    
     .container .ressourcesBar .ressource.population{
-        top: 141px;
+        background: rgb(35, 35, 35);
+        border: 2px solid black;
+        padding-right: 10px;
     }
 }
 
