@@ -5,7 +5,8 @@ div,canvas{
     
     transform: rotateX(0) rotateY(0);
     transform-style: preserve-3d;
-    transition-duration: 0.1s;
+    transition-duration: 0s;
+    transition-timing-function: ease-in-out
     
     
 }
@@ -14,6 +15,7 @@ width:100vw;
 height:100vh;
 position: absolute;
 z-index: 1;
+will-change: opacity;
 }
 .homePage .buttonUser{
     position: absolute;
@@ -91,6 +93,7 @@ z-index: 1;
     transition-duration: 0.5s;
     left:calc(50% - 100px);
     top:calc(50% - 25px);
+    will-change: opacity;
 }
 .homePage #playBtn:hover{
     cursor: pointer;
@@ -172,8 +175,83 @@ z-index: 1;
     left:calc(75% - 60px);
     position: absolute;
     text-decoration: none;
- 
 }
+.homePage .hyperSpace{
+    display:none;
+    vertical-align: middle;
+    perspective: 10px;
+    perspective-origin: 100%,100%;
+    position: relative;
+    background: none;
+    width: 100vw;
+    height: 100vh;
+
+
+}
+.hyperSpace .side{
+    background: url(../images/star.png);
+    background-size: cover;
+    position: absolute;
+    opacity: 0;
+    animation: starFade 5s infinite linear;
+    animation-delay: 0;
+    width: 100vw;
+    height:100vh;
+
+}
+.hyperSpace .starContainer{
+    position: absolute;
+    width: 100%;;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: starMove 6s infinite linear;
+    animation-fill-mode: forwards;
+    z-index: 10;
+    background: none;
+}
+.hyperspace::before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.starContainer .sideRight {
+    transform: rotateY(90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    width: 2200px;
+    
+}
+.starContainer .sideLeft {
+    transform: rotateY(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    
+}
+.starContainer .sideTop {
+    transform: rotateX(90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    height:1100px;
+    
+}
+.starContainer .sideBottom {
+    transform: rotateX(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    height: 1100px;
+}
+.starContainer .sideBack {
+    transform: rotateX(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+}
+.hyperSpace .backgroundSpace{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+    background: black;
+    transition-duration: 0s;
+    border-radius: 100%;
+}
+
+
 
 
 @keyframes pulse {
@@ -218,6 +296,30 @@ z-index: 1;
     opacity: 0;
     }
 }
+
+@keyframes starMove {
+    0%{
+        transform: translateZ(-500px) rotate(0deg);
+    }
+    100%{
+        transform: translateZ(500px) rotate(0deg);
+    }
+}  
+@keyframes starFade {
+    0%{
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 @font-face {
 	font-family: "Lato Medium";
 	src: url("../fonts/Lato-Medium.ttf")

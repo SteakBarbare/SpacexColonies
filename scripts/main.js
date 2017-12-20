@@ -28,8 +28,7 @@ loader
     .load(setup);
     let earth;
 function setup() {
-    earth = new Sprite(resources["images/earth.png"].texture)
-    earth.x=100 
+    
 }
 
 //TILT
@@ -92,6 +91,8 @@ const menuLaunch = () => {
         const logoTitle =document.querySelector(".logoTitle")
         const goalArea = document.querySelector(".goalArea")
         const bottomLink= document.querySelector(".bottomLink")
+        const interactiveMenu=document.querySelector(".interactiveMenu")
+        const hyperSpace= document.querySelector(".hyperSpace")
         // const organicCircle = (elem) => {
         //     document.addEventListener("mousemove",(event) => {
         //         cursorX = event.clientX,
@@ -144,13 +145,36 @@ const menuLaunch = () => {
 
         
         actionB.addEventListener("click", (event) => {
-            console.log("pressed")
+            
             if (menuState == 0){
-                app.stage.addChild(earth)
-                actionB.innerHTML="P L A Y"
-                logoTitle.style.transform="translateX(-400px)"
-                goalArea.style.opacity=1
-                bottomLink.style.opacity=1
+
+                const hyperSpaceStage = () => {
+                    hyperSpace.style.display="inline-block"
+                    canvas.style.opacity=0
+                    interactiveMenu.style.opacity=0
+                    actionB.style.opacity=0
+                    document.body.style.background="black"
+                    hyperSpace.style.transform="scale(0.5)"
+                    setTimeout(function(){
+                        canvas.style.opacity=1
+                        interactiveMenu.style.opacity=1
+                        actionB.style.opacity=1
+                        hyperSpace.style.display="none"
+                        midMenuStage()
+                    },4400)
+
+                }
+                hyperSpaceStage()
+
+                const midMenuStage = () => {
+                    
+                    actionB.innerHTML="P L A Y"
+                    logoTitle.style.transform="translateX(-400px)"
+                    goalArea.style.opacity=1
+                    bottomLink.style.opacity=1
+                    
+
+                }
 
     
             }
