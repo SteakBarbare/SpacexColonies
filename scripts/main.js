@@ -46,7 +46,7 @@ PIXI.loader
 
 .load(setupIni);
 
-// Sprite Création
+// Sprite Creation
 
 let sprite;
 
@@ -132,6 +132,8 @@ function setup() {
     }
 }
 
+// Initial setup when launching the game
+
 function setupIni() {
 
     const coordX = (canvasBuilder.width / 2 - (canvasBuilder.width / 2 % 100)) / 100;
@@ -177,8 +179,10 @@ for (let i = 0; i < grid.length; i++){
 canvasBuilder.addEventListener(
     'mousemove',
     (e) =>{
-        sprite.x = e.clientX - (e.clientX % 100);
-        sprite.y = e.clientY - (e.clientY % 100);
+        const coordX = e.clientX - (e.clientX % 100);
+        const coordY = e.clientY - (e.clientY % 100);
+        sprite.x = coordX;
+        sprite.y = coordY;
     }
 )
 
@@ -192,6 +196,7 @@ canvasBuilder.addEventListener(
         let conditions = true;
         if((grid[coordX][coordY][2] == 0) && (selection == false)){
             for(let i = 1; i < buildings.length; i++){
+                conditions = true;
                 if(buildings[i].gameName == buildingName){
                     for(let j = 0; j < buildings[i].condition.length; j++){
                         let bool = false;
@@ -209,12 +214,26 @@ canvasBuilder.addEventListener(
                     if(conditions == true){
                         if((materials >= buildings[i].materialsPrice) && (energy >= buildings[i].energyPrice)){
                             materials -= buildings[i].materialsPrice;
-                            energy -= buildings[i].energyPrice
+                            energy -= buildings[i].energyPrice;
+                            maxEnergy += buildings[i].energyLimit;
+                            maxFood += buildings[i].foodLimit;
+                            maxMaterials += buildings[i].materialLimit;
+                            pilgrims += buildings[i].pop;
                             setup();
                             grid[coordX][coordY][2] = buildingName;
+                        }else{
+                            const missingMat = buildings[i].materialsPrice - materials;
+                            const missingEne = buildings[i].energyPrice - energy;
+                            if(missingMat <= 0){
+                                window.alert(`Missing ${0} materials and ${missingEne} energy.`);
+                            }else if(missingEne <= 0){
+                                window.alert(`Missing ${missingMat} materials and ${0} energy.`);
+                            }else{
+                                window.alert(`Missing ${missingMat} materials and ${missingEne} energy.`);
+                            }
                         }
                     }else{
-                        window.alert(`Ce bâtiment demande au préalable la construction de: ${buildings[i].condition}`);
+                        window.alert(`This building require the construction of: ${buildings[i].condition}`);
                     }
                 }
             }     
@@ -240,15 +259,16 @@ document.addEventListener(
 
 // Ressources Depletion
 
-const actualFood = document.querySelector('.food');
-const actualPilgrims = document.querySelector('.pilgrims');
+const stocks = document.querySelectorAll('.stocks');
+const prod = document.querySelectorAll('.production');
 
 // Ressources Consumption & Production
 
 setInterval(
     ()=>{
         //  Buildings
-        let greenH = 0;
+        let prodRation = 0,
+            greenH = 0,
             hydro = 0,
             printer = 0,
             generator = 0,
@@ -276,18 +296,26 @@ setInterval(
         }
 
         // Food update 
-        food -= 0.05 * pilgrims - (greenH * 0.6) - (hydro * 0.1);
+        prodRation -= 0.05 * pilgrims - (greenH * 0.6) - (hydro * 0.1);
+        food += prodRation;
+
         if(food < 0){
             food = 0;
         }else if(food > maxFood){
             food = maxFood;
         }
 
+        // Notifications -> Food
+
+        stocks[1].innerHTML = `${Math.trunc(food)} / ${Math.trunc(maxFood)}`;
+        prod[1].innerHTML = `${Math.trunc(prodRation)} / s`;
+    
 
         //  Energy Production/Depletion
 
         greenH = 0;
         hydro = 0;
+        prodRation = 0;
 
         //  Searching through the grid for energy buildings
         for(let i = 0; i < grid.length; i++){
@@ -323,35 +351,53 @@ setInterval(
         }
 
         // Energy update 
-        energy -= -5 + (printer * 5) - (generator * 30) + (hydro * 5) + (greenH * 5) + (factory * 5) + (energyStock *5 ) + (wareH * 5) + (habitations * 8) + (sickB * 15) + (sport * 20) - (leiden * 200) + (fuelDrill * 100) + (launcher * 50);
-        
+        prodRation -= -5 + (printer * 5) - (generator * 30) + (hydro * 5) + (greenH * 5) + (factory * 5) + (energyStock *5 ) + (wareH * 5) + (habitations * 8) + (sickB * 15) + (sport * 20) - (leiden * 200) + (fuelDrill * 100) + (launcher * 50);
+        energy += prodRation;
+
         if(energy < 0){
             energy = 0;
         }else if(energy > maxEnergy){
             energy = maxEnergy;
         }
+
+        // Notifications -> Energy
+
+        stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)}`;
+        prod[0].innerHTML = `${Math.trunc(prodRation)} / s`;
         
         //  Materials Production/Depletion
 
         factory = 0;
+        prodRation = 0;
 
         //  Searching through the grid for energy buildings
         for(let i = 0; i < grid.length; i++){
             for(let j = 0; j < grid.length; j++){
                 if(grid[i][j][2] == "sulfurFactory"){
-                    factory++
+                    factory++;
                 }
             }
         }
 
         // Energy update 
-        materials += 0.5 + (factory * 1);
+        prodRation += 0.5 + (factory * 1);
+        materials += prodRation;
         
         if(materials < 0){
             materials = 0;
         }else if(materials > maxMaterials){
             materials = maxMaterials;
         }
+
+        // Notifications -> Materials
+
+        stocks[2].innerHTML = `${Math.trunc(materials)} / ${Math.trunc(maxMaterials)}`;
+        prod[2].innerHTML = `${Math.trunc(prodRation)} / s`;
+
+        // Notifications -> Population
+
+        stocks[3].innerHTML = Math.round(pilgrims);
+
     },
     1000
 );
@@ -367,16 +413,6 @@ setInterval(
     5000
 );
 
-// Notifications
-setInterval(
-    ()=>{
-        console.log(`Food Left: ${Math.trunc(food)}`); 
-        console.log(`Energy left: ${energy}`);
-        console.log(`Materials: ${materials}`);
-        console.log(`Pilgrims Alive: ${pilgrims}`);
-    },
-    100
-);
 
 // Building Selection from DOM
 
@@ -386,6 +422,7 @@ for(let i = 0; i < buildingButtons.length; i++){
     buildingButtons[i].addEventListener(
         'click',
         (event)=> {
+            event.preventDefault();
             buildingName = buildings[i + 1].gameName;
             console.log(buildingName);
             app.stage.removeChild(sprite);
@@ -512,7 +549,7 @@ const silo = {
     energyUsed: 10,
     energyLimit: 0,
     foodProduction: 0,
-    foodLimit: 100,
+    foodLimit: 20,
     pop: 0
 }
 
@@ -521,13 +558,13 @@ const battery = {
     gameName: "battery",
     description: "",
     condition: ["headQuarters", "D3Printer", "solarTurbine"],
-    materialsPrice: 200,
+    materialsPrice: 80,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 200,
+    energyPrice: 150,
     energyProduction: 0,
     energyUsed: 10,
-    energyLimit: 0,
+    energyLimit: 50,
     foodProduction: 0,
     foodLimit: 0,
     pop: 0
@@ -538,10 +575,10 @@ const warehouse = {
     gameName: "warehouse",
     description: "",
     condition: ["headQuarters", "D3Printer", "sulfurFactory"],
-    materialsPrice: 150,
+    materialsPrice: 100,
     materialsProduction: 0,
-    materialLimit: 100,
-    energyPrice: 150,
+    materialLimit: 50,
+    energyPrice: 200,
     energyProduction: 0,
     energyUsed: 10,
     energyLimit: 0,
@@ -555,10 +592,10 @@ const launchingRamp = {
     gameName: "launchingRamp",
     description: "",
     condition: ["headQuarters", "D3Printer", "drill"],
-    materialsPrice: 150,
+    materialsPrice: 400,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 90,
+    energyPrice: 300,
     energyProduction: 0,
     energyUsed: 50,
     energyLimit: 0,
@@ -581,7 +618,7 @@ const houses = {
     energyLimit: 0,
     foodProduction: 0,
     foodLimit: 0,
-    pop: 0
+    pop: 20
 }
 
 const sickBay = {
@@ -671,3 +708,36 @@ const buildings =[
     leindenfrostTurbine, 
     oilSlickDrill
 ];
+
+// Icon change depending on building disponibility
+setInterval(
+    () =>{
+    let conditions = true;
+        for(let i = 1; i < buildings.length; i++){
+            conditions = true;
+            for(let j = 0; j < buildings[i].condition.length; j++){
+                let bool = false;
+                for(let fuuf = 0; fuuf < grid.length; fuuf++){
+                    for(let jeej = 0; jeej < grid.length; jeej++){
+                        if(grid[fuuf][jeej][2] == buildings[i].condition[j]){
+                            bool = true;
+                        }
+                    }
+                }
+                if(bool == false){
+                    conditions = false;
+                }
+            }
+            if(conditions == true){
+                if((materials >= buildings[i].materialsPrice) && (energy >= buildings[i].energyPrice)){
+                    buildingButtons[i-1].style.background = "rgb(35, 35, 35)";
+                }else{
+                    buildingButtons[i-1].style.background = "red";
+                }
+            }else{
+                buildingButtons[i-1].style.background = "red";
+            }
+        }
+    },
+    100
+);
