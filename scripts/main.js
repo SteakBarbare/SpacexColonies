@@ -11,8 +11,7 @@ let app = new PIXI.Application({
     height: 1080,
     antialias: true, 
     transparent: false, 
-    resolution: 1,
-    forceCanvas: true
+    resolution: 1
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
@@ -308,7 +307,7 @@ setInterval(
         // Notifications -> Food
 
         stocks[1].innerHTML = `${Math.trunc(food)} / ${Math.trunc(maxFood)}`;
-        prod[1].innerHTML = `${Math.trunc(prodRation)} / s`;
+        prod[1].innerHTML = `${prodRation.toFixed(2)} / s`;
     
 
         //  Energy Production/Depletion
@@ -363,7 +362,7 @@ setInterval(
         // Notifications -> Energy
 
         stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)}`;
-        prod[0].innerHTML = `${Math.trunc(prodRation)} / s`;
+        prod[0].innerHTML = `${prodRation.toFixed(2)} / s`;
         
         //  Materials Production/Depletion
 
@@ -392,7 +391,7 @@ setInterval(
         // Notifications -> Materials
 
         stocks[2].innerHTML = `${Math.trunc(materials)} / ${Math.trunc(maxMaterials)}`;
-        prod[2].innerHTML = `${Math.trunc(prodRation)} / s`;
+        prod[2].innerHTML = `${prodRation.toFixed(2)} / s`;
 
         // Notifications -> Population
 
@@ -506,7 +505,7 @@ const greenhouse = {
     name: "Greenhouse",
     gameName: "greenhouse",
     description: "",
-    condition: ["headQuarters", "D3Printer"],
+    condition: ["headQuarters", "D3Printer", "hydroOxygenComplex"],
     materialsPrice: 20,
     materialsProduction: 0,
     materialLimit: 0,
