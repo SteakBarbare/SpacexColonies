@@ -70,7 +70,6 @@ body{
 /* Style of every descriptions of buttons in the menu games */
 .container .menu .buildingsList .buildingsButtons .description{
     background: rgb(35, 35, 35);
-    border: 2px solid rgb(12, 71, 7);
     position: absolute;
     width: 500%;
     height: 200%;
@@ -271,16 +270,19 @@ body{
 @media (max-width: 1450px){
     .container .menu .buildingsList{
         position: absolute;
-        background: rgb(35, 35, 35);
         width: 100%;
         height: 7%;
         top: 93%;
         z-index: 1;
         font-size: 0;
     }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
     .container .menu .buildingsList .buildingsButtons .description{
         background: rgb(35, 35, 35);
-        border: 2px solid rgb(12, 71, 7);
         position: absolute;
         width: 650%;
         height: 250%;
@@ -308,21 +310,25 @@ body{
 @media (max-width: 1110px){
     .container .menu .buildingsList{
         position: absolute;
-        background: rgb(35, 35, 35);
         width: 100%;
         height: 5%;
         top: 95%;
         z-index: 1;
         font-size: 0;
     }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
     .container .menu .buildingsList .buildingsButtons .description{
         background: rgb(35, 35, 35);
-        border: 2px solid rgb(12, 71, 7);
         position: absolute;
         width: 850%;
         height: 350%;
         display: none;
     }
+
     .container .menu .buildingsList .buildingsButtons .description h1{
         color: rgb(223, 223, 223);
         font-size: 26px;
@@ -340,33 +346,31 @@ body{
         font-size: 14px;
         margin:5px 10px;
     }
-    
-    /* Place the description over its associate button */
-    .container .menu .buildingsList .buildingsButtons.oilSlickDrill .description.oilSlickDrill{
-        right: 0;
-        bottom: 100%;
-    }
 }
 
 @media (max-width: 920px){
     .container .menu .buildingsList{
         position: absolute;
-        background: rgb(35, 35, 35);
         width: 100%;
         height: 4%;
         top: 96%;
         z-index: 1;
         font-size: 0;
     }
+
+    .container .menu .buildingsList .buildingsButtons{
+        background: rgb(35, 35, 35);
+    }
+
     .container .menu .buildingsList .buildingsButtons .description{
         background: rgb(35, 35, 35);
-        border: 2px solid rgb(12, 71, 7);
         position: absolute;
         width: 850%;
         height: 500%;
         display: none;
         padding: 5px;
     }
+
     .container .menu .buildingsList .buildingsButtons .description h1{
         color: rgb(223, 223, 223);
         font-size: 25px;
@@ -383,6 +387,58 @@ body{
         color: rgb(223, 223, 223);
         font-size: 13px;
         margin:5px 2px;
+    }
+
+    /* Change the ressource bar on rezise of the window */
+    .container .ressourcesBar{
+        height: 5%;
+        position: absolute;
+        z-index: 1;
+    }
+    /* Style of the elements where the ressources appears */
+    .container .ressourcesBar .ressource{
+        background: rgb(35, 35, 35);
+        color: rgb(223, 223, 223); 
+        height: 100%;
+        font-size: 25px;
+        border: 2px solid black;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .container .ressourcesBar .logo{
+        width: 50px;
+        height: 100%;
+        position: relative;
+        left:0;
+    }
+    
+    .container .ressourcesBar .ressource img{
+        display: inline-block;
+        height: 98%;
+        width: 98%;
+        position: relative;
+        left:0;
+    }
+    
+    .container .ressourcesBar .ressource p{
+        padding-right: 20px;
+        padding-top: 3%;
+        position: relative;
+        left:0;
+    }
+    
+    .container .ressourcesBar .ressource.food{
+        top: 47px;
+    }
+    
+    .container .ressourcesBar .ressource.materials{
+        top: 94px;
+    }
+    
+    .container .ressourcesBar .ressource.population{
+        top: 141px;
     }
 }
 
