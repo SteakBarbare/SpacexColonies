@@ -206,8 +206,6 @@ canvasBuilder.addEventListener(
                             for(let jeej = 0; jeej < grid.length; jeej++){
                                 if(grid[fuuf][jeej][2] == buildings[i].condition[j]){
                                     bool = true;
-                                }else if(grid[fuuf][jeej][2] != 0){
-                                    buildingNumbers++;
                                 }
                             }
                         }
@@ -217,7 +215,17 @@ canvasBuilder.addEventListener(
                     }
                     if(conditions == true){
                         if((materials >= buildings[i].materialsPrice) && (energy >= buildings[i].energyPrice)){
-                            if(Math.round(buildingNumbers/2) <= Math.round(pilgrims/2) || (buildingName == "house")){
+                            for(let fuuf = 0; fuuf < grid.length; fuuf++){
+                                for(let jeej = 0; jeej < grid.length; jeej++){
+                                    if((grid[fuuf][jeej][2] != 0) && (grid[fuuf][jeej][2] != "house")){
+                                        buildingNumbers++;
+                                    }
+                                }
+                            }
+                            let encule = (Math.ceil(buildingNumbers/2));
+                            console.log(buildingNumbers);
+                            console.log(encule);
+                            if((buildingNumbers < Math.ceil(pilgrims/3)) || (buildingName == "houses")){
                                 materials -= buildings[i].materialsPrice;
                                 energy -= buildings[i].energyPrice;
                                 maxEnergy += buildings[i].energyLimit;
@@ -620,7 +628,7 @@ const houses = {
     materialsPrice: 35,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 350,
+    energyPrice: 50,
     energyProduction: 0,
     energyUsed: 10,
     energyLimit: 0,
@@ -688,7 +696,7 @@ const oilSlickDrill = {
     materialsPrice: 300,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 400,
+    energyPrice: 350,
     energyProduction: 0,
     energyUsed: 100,
     energyLimit: 0,
