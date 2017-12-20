@@ -25,13 +25,11 @@ const canvas =  document.querySelector("canvas")
 //EARTH
 loader
     .add("images/earth.png")
-    .add("images/logo.png")
     .load(setup);
+    let earth;
 function setup() {
-    let earth = new Sprite(resources["images/earth.png"].texture)
-    earth.x=100
-    app.stage.addChild(earth)
-    
+    earth = new Sprite(resources["images/earth.png"].texture)
+    earth.x=100 
 }
 
 //TILT
@@ -88,53 +86,76 @@ const menuLaunch = () => {
     starSet()
     const earthArea = document.querySelector(".earthArea")
     const menuSet = () => {  
-        const organicCircle = (elem) => {
-            document.addEventListener("mousemove",(event) => {
-                cursorX = event.clientX,
-                cursorY = event.clientY,
-                posELemX = elem.offsetLeft,
-                posELemY = elem.offsetTop,
-                xRatio=posELemX - cursorX,
-                yRatio=posELemY - cursorY
-                // const circleAttractFar = (elem) => {
-                //     const tendX = xRatio-15
-                //     const tendY = yRatio-15
-                //     elem.style.transform="translate3d(-"+tendX+"px,-"+tendY+"px,0)"
-                //     console.log(elem.style.transform)
-                // }
+        //VARIABLES
+        let menuState = 0
+        const actionB = document.querySelector(".selecPlay")
+        const logoTitle =document.querySelector(".logoTitle")
+        const goalArea = document.querySelector(".goalArea")
+        const bottomLink= document.querySelector(".bottomLink")
+        // const organicCircle = (elem) => {
+        //     document.addEventListener("mousemove",(event) => {
+        //         cursorX = event.clientX,
+        //         cursorY = event.clientY,
+        //         posELemX = elem.offsetLeft,
+        //         posELemY = elem.offsetTop,
+        //         xRatio=posELemX - cursorX,
+        //         yRatio=posELemY - cursorY
+        //         // const circleAttractFar = (elem) => {
+        //         //     const tendX = xRatio-15
+        //         //     const tendY = yRatio-15
+        //         //     elem.style.transform="translate3d(-"+tendX+"px,-"+tendY+"px,0)"
+        //         //     console.log(elem.style.transform)
+        //         // }
                 
-                if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
-                    elem.style.animation="expend 0.2s both"
-                    elem.style.backgroundImage="url('images/x.png')"
-                }
-                else if(xRatio <100 && yRatio<100){
-                    elem.style.animation=""
-                    elem.style.backgroundImage=""
-                    // circleAttractFar(elem)
+        //         if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
+        //             elem.style.animation="expend 0.2s both"
+        //             elem.style.backgroundImage="url('images/x.png')"
+        //         }
+        //         else if(xRatio <100 && yRatio<100){
+        //             elem.style.animation=""
+        //             elem.style.backgroundImage=""
+        //             // circleAttractFar(elem)
                     
-                }
-                else{
-                    elem.style.animation="pulse 3s infinite"
+        //         }
+        //         else{
+        //             elem.style.animation="pulse 3s infinite"
                     
-                }
-            })
-        }
-        organicCircle(earthArea)  
-        //EarthAREA interaction
-        const infoEarth=document.querySelector(".infoEarth")
-        let infoAppeared=0
-        earthArea.addEventListener("click",() => {
-            if (infoAppeared == 0){
-                infoEarth.style.animation="entranceRight 0.4s forwards"
-                infoAppeared=1
+        //         }
+        //     })
+        // }
+        // organicCircle(earthArea)  
+        // //EarthAREA interaction
+        // const infoEarth=document.querySelector(".infoEarth")
+        // let infoAppeared=0
+        // earthArea.addEventListener("click",() => {
+        //     if (infoAppeared == 0){
+        //         infoEarth.style.animation="entranceRight 0.4s forwards"
+        //         infoAppeared=1
 
-            }
-            else {
-                infoEarth.style.animation="exitRight 0.4s forwards "
-                infoAppeared=0
+        //     }
+        //     else {
+        //         infoEarth.style.animation="exitRight 0.4s forwards "
+        //         infoAppeared=0
                 
+        //     }
+        // })
+
+        //PlayButton
+
+        
+        actionB.addEventListener("click", (event) => {
+            console.log("pressed")
+            if (menuState == 0){
+                app.stage.addChild(earth)
+                actionB.innerHTML="P L A Y"
+                logoTitle.style.transform="translateX(-400px)"
+                goalArea.style.opacity=1
+                bottomLink.style.opacity=1
+
+    
             }
         })
+        
     }
     menuSet()
 

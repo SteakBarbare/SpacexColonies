@@ -9,8 +9,11 @@ div,canvas{
     
     
 }
-.homePage{
-    
+.homePage .interactiveMenu{
+width:100vw;
+height:100vh;
+position: absolute;
+z-index: 1;
 }
 .homePage .buttonUser{
     position: absolute;
@@ -45,29 +48,49 @@ div,canvas{
     background-position: center;    
     top:80%;
     left:70%;
+    opacity: 0;
 }
 .homePage .titleZone{
     position: absolute;
-    z-index: 2;
+    z-index: 45;
     top: 10%;
-    left: 10%;
+    left: calc(50% - 226px)
+}
+.titleZone .goalArea {
+    color: white;
+    font-family:"Lato Thin";
+    font-weight:100;
+    width: 456px;
+    height: 374px;
+    font-size:60px;
+    text-align: left;
+    opacity: 0;
+    transition-delay: 0.8s;
+    position: absolute;
+    left: -70%;
+    top:170%;
+    transition-duration:0.4s;
+    line-height: 60px;
+}
+.goalArea span{
+    width:100%;
+    display: inline-block;
 }
 .homePage #playBtn{
     position: absolute;
     width: 200px;
     height: 50px;
     border:solid white 1.5px;
-    top:170%;
-    left:92%;
     text-align: center;
-    font-family:Lato;
+    font-family:"Lato Black";
     text-transform: uppercase;
     color: white;
     font-size: 20px;
     padding-top: 12px;
     z-index: 30;
     transition-duration: 0.5s;
-    
+    left:calc(50% - 100px);
+    top:calc(50% - 25px);
 }
 .homePage #playBtn:hover{
     cursor: pointer;
@@ -81,6 +104,10 @@ div,canvas{
     z-index: 2;
     top:20%;    
     left:10%;
+    will-change: transform;
+    transition-duration:0.6s;
+    transition-timing-function: ease-in-out;
+
 }
 .homePage .selecArea:hover{
     cursor: pointer;
@@ -95,6 +122,7 @@ div,canvas{
     opacity: 0;
     transform: translate3d(100%, 0, 0);
     will-change: transform;
+    
 
 }
 .infoEarth .earthFrame{
@@ -106,9 +134,45 @@ div,canvas{
 
 }
 .earthFrame h3{
-    font-family:"Lato";
+    font-family:"Lato Black";
     text-align:center;
     text-transform: uppercase;
+}
+.homePage .bottomLink{
+    height:6%;
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    font-family: Lato light;
+    color:white;
+    opacity: 0;
+    transition-duration: 0.4s;
+    text-decoration: none;
+
+}
+.homePage .bottomLink:hover{
+    cursor: pointer;
+    
+
+}
+.bottomLink  .terms{
+    left:calc(20% - 43.5px);
+    position: absolute;
+    z-index: 10;
+    text-decoration: none;
+
+}
+.bottomLink .copyright{
+    left:calc(50% - 182px);
+    position: absolute;
+    text-decoration: none;
+}
+.bottomLink .linkOfi{
+    left:calc(75% - 60px);
+    position: absolute;
+    text-decoration: none;
+ 
 }
 
 
@@ -154,3 +218,19 @@ div,canvas{
     opacity: 0;
     }
 }
+@font-face {
+	font-family: "Lato Medium";
+	src: url("../fonts/Lato-Medium.ttf")
+} 
+@font-face {
+	font-family: "Lato Black";
+	src: url("../fonts/Lato-Heavy.ttf")
+} 
+@font-face {
+	font-family: "Lato Light";
+	src: url("../fonts/Lato-Light.ttf")
+} 
+@font-face {
+	font-family: "Lato Thin";
+	src: url("../fonts/Lato-Hairline.ttf")
+} 
