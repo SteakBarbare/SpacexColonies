@@ -93,6 +93,7 @@ const menuLaunch = () => {
         const bottomLink= document.querySelector(".bottomLink")
         const interactiveMenu=document.querySelector(".interactiveMenu")
         const hyperSpace= document.querySelector(".hyperSpace")
+        const marsPlanet = document.querySelector(".marsPlanet")
         // const organicCircle = (elem) => {
         //     document.addEventListener("mousemove",(event) => {
         //         cursorX = event.clientX,
@@ -172,6 +173,7 @@ const menuLaunch = () => {
                     logoTitle.style.transform="translateX(-400px)"
                     goalArea.style.opacity=1
                     bottomLink.style.opacity=1
+                    marsPlanet.style.opacity=1
                     
 
                 }

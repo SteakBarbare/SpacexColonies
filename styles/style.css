@@ -250,6 +250,16 @@ will-change: opacity;
     transition-duration: 0s;
     border-radius: 100%;
 }
+.homePage .marsPlanet{
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    left:calc(50% - 202px);
+    top:calc(50% - 201px);
+    will-change: opacity;
+    transition-duration: 0.4s;
+    
+}
 
 
 
