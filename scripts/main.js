@@ -51,11 +51,15 @@ const tiltCanv = (elem) => {
         cursorY = event.offsetY - posTop,
         cursorCenterX = midWidth - cursorX,
         cursorCenterY = midHeight - cursorY,
-        angle=50
+        angle=20
         elem.style.transform='perspective(' + perspective + ') rotateX('+(cursorCenterY / angle) +'deg) rotateY('+ -(cursorCenterX / angle) + 'deg)';
         elem.classList.remove("isOut") 
+        elem.addEventListener("mouseover",(event) => {
+            
+            
+        })
     })
-    document.addEventListener("mousemove",(event) => {
+    document.addEventListener("mouseout",(event) => {
         elem.classList.add("isOut")
     })
 }
@@ -116,6 +120,21 @@ const menuLaunch = () => {
             })
         }
         organicCircle(earthArea)  
+        //EarthAREA interaction
+        const infoEarth=document.querySelector(".infoEarth")
+        let infoAppeared=0
+        earthArea.addEventListener("click",() => {
+            if (infoAppeared == 0){
+                infoEarth.style.animation="entranceRight 0.4s forwards"
+                infoAppeared=1
+
+            }
+            else {
+                infoEarth.style.animation="exitRight 0.4s forwards "
+                infoAppeared=0
+                
+            }
+        })
     }
     menuSet()
 

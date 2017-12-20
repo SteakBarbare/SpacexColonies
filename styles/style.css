@@ -74,6 +74,7 @@ div,canvas{
     background: white;
     color:black;
     border-color: black;
+    perspective: 0px;
 }
 
 .homePage .logoTitle{
@@ -89,7 +90,11 @@ div,canvas{
     z-index: 1;
     width: auto;
     height:100%;
-    width:100%;    
+    width:300px;  
+    right:0;
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    will-change: transform;
 
 }
 .infoEarth .earthFrame{
@@ -97,7 +102,7 @@ div,canvas{
     height:100%;
     width: 300px;
     background: rgba(255,255,255,0.85);  
-    right: 0;
+    left: 0;
 
 }
 .earthFrame h3{
@@ -126,5 +131,26 @@ div,canvas{
     }
     to {
         transform: scale3d(1.3, 1.3, 1.3);
+    }
+}
+@keyframes entranceRight {
+    from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    }
+    to {
+    opacity: 1;
+    transform: none;
+    
+    }
+}
+@keyframes exitRight {
+    from {
+    opacity: 1;
+    transform: none;
+    }
+    to {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
     }
 }
