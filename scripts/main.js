@@ -11,7 +11,8 @@ let app = new PIXI.Application({
     height: 1080,
     antialias: true, 
     transparent: false, 
-    resolution: 1
+    resolution: 1,
+    forceCanvas: true
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
@@ -192,7 +193,9 @@ canvasBuilder.addEventListener(
     (e) =>{
         const coordX = ((e.clientX - (e.clientX % 100)) / 100);
         const coordY = ((e.clientY - (e.clientY % 100)) / 100);
-        let conditions = true;
+        let conditions = true,
+            buildingNumbers = 0;
+
         if((grid[coordX][coordY][2] == 0) && (selection == false)){
             for(let i = 1; i < buildings.length; i++){
                 conditions = true;
@@ -203,6 +206,8 @@ canvasBuilder.addEventListener(
                             for(let jeej = 0; jeej < grid.length; jeej++){
                                 if(grid[fuuf][jeej][2] == buildings[i].condition[j]){
                                     bool = true;
+                                }else if(grid[fuuf][jeej][2] != 0){
+                                    buildingNumbers++;
                                 }
                             }
                         }
@@ -212,14 +217,18 @@ canvasBuilder.addEventListener(
                     }
                     if(conditions == true){
                         if((materials >= buildings[i].materialsPrice) && (energy >= buildings[i].energyPrice)){
-                            materials -= buildings[i].materialsPrice;
-                            energy -= buildings[i].energyPrice;
-                            maxEnergy += buildings[i].energyLimit;
-                            maxFood += buildings[i].foodLimit;
-                            maxMaterials += buildings[i].materialLimit;
-                            pilgrims += buildings[i].pop;
-                            setup();
-                            grid[coordX][coordY][2] = buildingName;
+                            if(Math.round(buildingNumbers/2) <= Math.round(pilgrims/2) || (buildingName == "house")){
+                                materials -= buildings[i].materialsPrice;
+                                energy -= buildings[i].energyPrice;
+                                maxEnergy += buildings[i].energyLimit;
+                                maxFood += buildings[i].foodLimit;
+                                maxMaterials += buildings[i].materialLimit;
+                                pilgrims += buildings[i].pop;
+                                setup();
+                                grid[coordX][coordY][2] = buildingName;
+                            }else{
+                                window.alert("You dont have enough population to increase the size of your colony, build more houses")
+                            }
                         }else{
                             const missingMat = buildings[i].materialsPrice - materials;
                             const missingEne = buildings[i].energyPrice - energy;
@@ -591,7 +600,7 @@ const launchingRamp = {
     gameName: "launchingRamp",
     description: "",
     condition: ["headQuarters", "D3Printer", "drill"],
-    materialsPrice: 400,
+    materialsPrice: 250,
     materialsProduction: 0,
     materialLimit: 0,
     energyPrice: 300,
@@ -611,7 +620,7 @@ const houses = {
     materialsPrice: 35,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 50,
+    energyPrice: 350,
     energyProduction: 0,
     energyUsed: 10,
     energyLimit: 0,
@@ -659,10 +668,10 @@ const leindenfrostTurbine = {
     gameName: "leindenfrostTurbine",
     description: "",
     condition: ["headQuarters", "D3Printer", "solarTurbine"],
-    materialsPrice: 300,
+    materialsPrice: 200,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 500,
+    energyPrice: 300,
     energyProduction: 45,
     energyUsed: 0,
     energyLimit: 0,
@@ -676,10 +685,10 @@ const oilSlickDrill = {
     gameName: "drill",
     description: "",
     condition: ["headQuarters", "D3Printer", "houses", "sickBay", "sportsHall"],
-    materialsPrice: 800,
+    materialsPrice: 300,
     materialsProduction: 0,
     materialLimit: 0,
-    energyPrice: 300,
+    energyPrice: 400,
     energyProduction: 0,
     energyUsed: 100,
     energyLimit: 0,
