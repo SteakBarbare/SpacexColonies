@@ -1,6 +1,43 @@
 body{
     overflow:hidden;
+    font-size: 0;
 }
+/* Style of the ressource bar during the game */
+.container .ressourcesBar{
+    height: 5%;
+    width: 100%;
+    background: lightblue;
+    position: absolute;
+    font-size: 20px;
+    z-index: 1;
+}
+
+.container .ressourcesBar .logo{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+}
+
+.container .ressourcesBar .ressource{
+    display: inline-block;
+    font-size: 25px;
+    border: 2px solid black;
+    background: lightcyan;
+    position: relative;
+}
+
+.container .ressourcesBar .ressource p{
+    padding-right:20px;
+    display: inline-block;
+}
+
+.container .ressourcesBar .ressource img{
+    height: 100%;
+    width: 100%;
+}
+
+
 /* Style of the menu for buildings constructions during the game */
 .container .menu .buildingsList{
     position: absolute;
@@ -15,8 +52,7 @@ body{
 /* Styles of buttons menu */
 .container .menu .buildingsList .buildingsButtons{
     display: inline-block;
-    height: 100px;
-    width: 100px;
+    height: 100%;
     margin: 0;
     position: relative;
     cursor: pointer;
@@ -26,9 +62,6 @@ body{
 .container .menu .buildingsList .buildingsButtons img{
     border: 2px solid black;
     height: 100%;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
 }
 /* Style of every descriptions of buttons in the menu games */
 .container .menu .buildingsList .buildingsButtons .description{
