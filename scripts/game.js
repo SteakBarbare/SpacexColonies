@@ -9,9 +9,9 @@ selectionTitle = selectionDiv.querySelector(".buildingsH1"),
 selectionText = selectionDiv.querySelector(".buildingsDescription"),
 selectionProd = selectionDiv.querySelectorAll(".title"),
 selectionUpgrade = selectionDiv.querySelector(".upgradeButton"),
-selectionErase = selectionDiv.querySelector(".eraseButton");
-const audio = document.querySelector("audio")
-audio.currentTime=currentSongTime
+selectionErase = selectionDiv.querySelector(".eraseButton")
+console.log(currentSongTime)
+audio.currentTime=Math.round(currentSongTime)
 let Application = PIXI.Application,
 loader = PIXI.loader,
 resources = PIXI.loader.resources,
