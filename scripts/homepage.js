@@ -114,8 +114,6 @@ const menuLaunch = () => {
                 }
                 
             else if (menuState == 1){
-                currentSongTime=audio.currentTime
-                console.log(currentSongTime)
                 document.location.href="pages/game.html"; 
             }
         })
