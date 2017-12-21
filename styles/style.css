@@ -258,6 +258,8 @@ will-change: opacity;
     top:calc(50% - 201px);
     will-change: opacity;
     transition-duration: 0.4s;
+    border-radius:50%;
+    filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
     
 }
 
