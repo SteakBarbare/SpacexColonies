@@ -102,6 +102,10 @@ body{
     color: white;
 }
 
+.container .buildingsPopUp .lastEffect{
+    margin-bottom: 25%;
+}
+
 .container .buildingsPopUp .logoRessources{
     width: 15px;
     height: 15px;
@@ -117,7 +121,7 @@ body{
 }
 
 .container .buildingsPopUp .upgradeButton{
-    left: 4%;
+    left: -8%;
 }
 
 .container .buildingsPopUp .upgradeButton img{
@@ -129,7 +133,7 @@ body{
 }
 
 .container .buildingsPopUp .eraseButton{
-    right: 24%;
+    right: 14%;
 }
 
 .container .buildingsPopUp .descriptionLogos img.hover{
@@ -144,6 +148,49 @@ body{
 
 .container .buildingsPopUp .descriptionLogos.eraseButton:hover .hover{
     opacity: 1;
+}
+
+
+.container .buildingsPopUp .close{
+    font-size: 18px;
+    color: white;
+}
+
+/*****************************
+
+        You need to PopUp
+
+******************************/
+.container .youNeedTo{
+    position: absolute;
+    z-index: 2;
+    background: rgb(35, 35, 35);
+    border: 3px solid black;
+    border-radius: 12px;
+    width: 25%;
+    height: 10%;
+    top: 45%;
+    left: 40%;
+    text-align: center;
+}
+
+.container .youNeedTo p{
+    color: white;
+    font-size: 16px;
+    margin-top: 8%;
+}
+
+.container .youNeedTo p span{
+    color: white;
+    font-size: 20px;
+}
+
+.container .youNeedTo .moreBuildings{
+    display: none;
+}
+
+.container .youNeedTo .morePopulation{
+    display: none;
 }
 
 
@@ -190,7 +237,7 @@ body{
 .container .ressourcesBar .ressource .gauge{
     display: inline-block;
     position: relative;
-    width: 300px;
+    width: 250px;
     height: 95%;
     background: rgb(35, 35, 35);
     border: 2px solid black;
@@ -234,6 +281,68 @@ body{
 }
 .container .ressourcesBar .ressource.materials .gauge .gaugeFiller{
     background: #555453;
+}
+
+/*****************************
+
+         Technology Tree
+
+******************************/
+
+.container .technoTreeContainer .technoTree{
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    top: 5%;
+    height: 850px;
+    width: 550px;
+    border: 2px solid black;
+    border-radius: 6px;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.08, 1.15, 0.74, 0.97);
+    will-change: transform;
+}
+
+
+.container .technoTreeContainer .technoTree img{
+    height: 100%;
+    width: 100%;
+}
+
+.container .technoTreeContainer .arrowButton{
+    position: absolute;
+    z-index: 4;
+    top: 45%;
+    left: -1.5%;
+    background: rgb(35, 35, 35);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    transition: transform 0.6s cubic-bezier(0.08, 1.15, 0.74, 0.97);
+    will-change: transform;
+}
+
+.container .technoTreeContainer:hover .technoTree{
+    transform: translateX(-2%);
+}
+
+.container .technoTreeContainer:hover .arrowButton{
+    transform: translateX(525px);
+}
+
+.container .technoTreeContainer .arrowButton .arrowImage img{
+    position: absolute;
+    left: 25px;
+    top: 12.5px;
+    width: 60%;
+    height: 60%;
+    transition: transform 0.4s ease;
+    transform-origin: 50 50;
+}
+
+.container .technoTreeContainer:hover .arrowButton .arrowImage img{
+    transform: rotate(180deg);
+    left: 0;
 }
 
 /*****************************
@@ -569,6 +678,23 @@ body{
         border: 2px solid black;
         padding-right: 10px;
     }
+    .container .buildingsPopUp .lastEffect{
+        margin-bottom: 15%;
+    }
+
+    
+    .container .technoTreeContainer .arrowButton{
+        position: absolute;
+        z-index: 4;
+        top: 45%;
+        left: -2.5%;
+        background: rgb(35, 35, 35);
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        transition: transform 0.6s cubic-bezier(0.08, 1.15, 0.74, 0.97);
+        will-change: transform;
+    }
 }
 
 @media (max-width: 1110px){
@@ -615,6 +741,11 @@ body{
         background: rgb(35, 35, 35);
         border: 2px solid black;
         padding-right: 10px;
+    }
+
+    .container .buildingsPopUp{
+        width: 20%;
+        height: 45%;
     }
 }
 
@@ -721,19 +852,3 @@ body{
     100%{
     }
 }
-@font-face {
-	font-family: "Lato Medium";
-	src: url("../fonts/Lato-Medium.ttf")
-} 
-@font-face {
-	font-family: "Lato Black";
-	src: url("../fonts/Lato-Heavy.ttf")
-} 
-@font-face {
-	font-family: "Lato Light";
-	src: url("../fonts/Lato-Light.ttf")
-} 
-@font-face {
-	font-family: "Lato Thin";
-	src: url("../fonts/Lato-Hairline.ttf")
-} 
