@@ -23,8 +23,7 @@ width: 1920,
 height: 1080,
 antialias: true, 
 transparent: false, 
-resolution: 1,
-forceCanvas: true
+resolution: 1
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
