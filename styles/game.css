@@ -190,7 +190,7 @@ body{
 .container .ressourcesBar .ressource .gauge{
     display: inline-block;
     position: relative;
-    width: 250px;
+    width: 300px;
     height: 95%;
     background: rgb(35, 35, 35);
     border: 2px solid black;

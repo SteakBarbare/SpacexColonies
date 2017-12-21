@@ -350,7 +350,8 @@ will-change: opacity;
 
 @font-face {
 	font-family: "Lato Medium";
-	src: url("../fonts/Lato-Medium.ttf")
+    src: url("../fonts/Lato-Medium.ttf");
+    
 } 
 @font-face {
 	font-family: "Lato Black";
