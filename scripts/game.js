@@ -442,7 +442,7 @@ setInterval(
 
     fillBarRatio = (energy / maxEnergy) * 100;
 
-    stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)}`;
+    stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)} ` ;
     prod[0].innerHTML = `${prodRation.toFixed(2)} / s`;
     fillerBar[0].style.width = `${fillBarRatio}%`;
     fillerBar[0].style.background = "#c6c60c";
