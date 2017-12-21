@@ -1,5 +1,9 @@
 let buildingName = "headQuarters";
 
+const popupDiv = document.querySelector(".popUp");
+const popupTitle = popupDiv.querySelector(".popUpH1");
+const popupText = popupDiv.querySelectorAll(".popUpParagraph");
+
 let Application = PIXI.Application,
     loader = PIXI.loader,
     resources = PIXI.loader.resources,
@@ -170,7 +174,7 @@ let selection = true;
 for (let i = 0; i < grid.length; i++){
     grid[i] = [i*100];
     for(let j = 0; j < grid.length; j++){
-        grid[i][j] = [i*100, j*100, 0];
+        grid[i][j] = [i*100, j*100, 0, "Bollocks"];
     }
 }
 
@@ -222,9 +226,9 @@ canvasBuilder.addEventListener(
                                     }
                                 }
                             }
-                            let encule = (Math.ceil(buildingNumbers/2));
-                            console.log(buildingNumbers);
-                            console.log(encule);
+                            // let encule = (Math.ceil(buildingNumbers/2));
+                            // console.log(buildingNumbers);
+                            // console.log(encule);
                             if((buildingNumbers < Math.ceil(pilgrims/3)) || (buildingName == "houses")){
                                 materials -= buildings[i].materialsPrice;
                                 energy -= buildings[i].energyPrice;
@@ -232,6 +236,15 @@ canvasBuilder.addEventListener(
                                 maxFood += buildings[i].foodLimit;
                                 maxMaterials += buildings[i].materialLimit;
                                 pilgrims += buildings[i].pop;
+                                buildingNumbers = 0;                                
+                                for(let fuuf = 0; fuuf < grid.length; fuuf++){
+                                    for(let jeej = 0; jeej < grid.length; jeej++){
+                                        if((grid[fuuf][jeej][2] != 0)){
+                                            buildingNumbers++;
+                                        }
+                                    }
+                                }
+                                grid[coordX][coordY][3] = buildingNumbers+1;
                                 setup();
                                 grid[coordX][coordY][2] = buildingName;
                             }else{
@@ -255,7 +268,14 @@ canvasBuilder.addEventListener(
             }     
         }else{
             app.stage.removeChild(sprite);
-            console.log(grid[coordX][coordY][2]);
+            console.log(grid[coordX][coordY][3]);
+            if(grid[coordX][coordY][3] != "Bollocks"){
+                popupDiv.style.display = "block";
+                popupTitle.innerHTML = `${grid[coordX][coordY][2]}`;
+                popupText[0].innerHTML = "The Hydro-Oxygen Complex is essential to start making food and ensure your pilgrim’s life.";
+                popupText[1].innerHTML = "Most of all, it will unlock your main food building: the greenhouse.";
+                popupText[2].innerHTML = "You’d better build it fast.";
+            }
             selection = true;
         }
     }
@@ -276,7 +296,7 @@ document.addEventListener(
 // Ressources Depletion
 
 const stocks = document.querySelectorAll('.stocksValue');
-const stocksPop = document.querySelector('.stocks');
+const stocksPop = document.querySelector('.populationNumber');
 const prod = document.querySelectorAll('.production');
 const fillerBar = document.querySelectorAll('.gaugeFiller');
 
@@ -333,7 +353,7 @@ setInterval(
         stocks[1].innerHTML = `${Math.trunc(food)} / ${Math.trunc(maxFood)}`;
         prod[1].innerHTML = `${prodRation.toFixed(2)} / s`;
         fillerBar[1].style.width = `${fillBarRatio}%`;
-        fillerBar[1].style.background = "pink";
+        fillerBar[1].style.background = "#d66478";
         
 
         //  Energy Production/Depletion
@@ -392,7 +412,7 @@ setInterval(
         stocks[0].innerHTML = `${Math.trunc(energy)} / ${Math.trunc(maxEnergy)}`;
         prod[0].innerHTML = `${prodRation.toFixed(2)} / s`;
         fillerBar[0].style.width = `${fillBarRatio}%`;
-        fillerBar[0].style.background = "yellow";
+        fillerBar[0].style.background = "#c6c60c";
         
         //  Materials Production/Depletion
 
@@ -425,11 +445,11 @@ setInterval(
         stocks[2].innerHTML = `${Math.trunc(materials)} / ${Math.trunc(maxMaterials)}`;
         prod[2].innerHTML = `${prodRation.toFixed(2)} / s`;
         fillerBar[2].style.width = `${fillBarRatio}%`;
-        fillerBar[2].style.background = "gray";
+        fillerBar[2].style.background = "#555453";
 
         // Notifications -> Population
 
-        stocks.innerHTML = Math.round(pilgrims);
+        stocksPop.innerHTML = Math.round(pilgrims);
 
     },
     1000
@@ -556,7 +576,7 @@ const sulfurFactory = {
     name: "Sulfur Factory",
     gameName: "sulfurFactory",
     description: "",
-    condition: ["headQuarters", "D3Printer", "solarTurbine", "greenhouse"],
+    condition: ["headQuarters", "D3Printer", "solarTurbine"],
     materialsPrice: 25,
     materialsProduction: 5,
     materialLimit: 0,
@@ -775,3 +795,224 @@ setInterval(
     },
     100
 );
+
+// Tutorial
+
+let tutorialState = 7;
+    tutoComplete = false;
+    waitingFor = false;
+
+if(tutorialState != 8){
+    setInterval(
+        () =>{
+
+            if(tutorialState == 7){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[8].style.animation = "flashingYellow 2s infinite";
+                popupDiv.style.display = "block";
+                popupTitle.innerHTML = "Welcome to SpaceX Mars Colony";
+                popupText[0].innerHTML = "Your goal is to create a launch ramp to launch your spacecraft back to earth, making Mars a Human Colony...";
+                popupText[1].innerHTML = "And humans, a multiplanet species.";
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        popupDiv.style.display = "none";
+                        buildingButtons[8].style.animation = "";
+                        tutorialState = 6;
+                    }
+                );
+            }else if(tutorialState == 6){
+                
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                popupDiv.style.display = "block";
+                popupTitle.innerHTML = "These are your resources.";
+                popupText[0].innerHTML = "Each buildings consumes some energy. Energy is generated thanks to the wind-solar turbine.";
+                popupText[1].innerHTML = "This is your food, 20 pilgrims consumes 1(logo Food)/secondes.";
+                popupText[2].innerHTML = "The materials are your resources to create building.";
+                fillerBar[0].style.animation = "flashing 2s infinite";
+                fillerBar[1].style.animation = "flashing 2s infinite";
+                fillerBar[2].style.animation = "flashing 2s infinite";
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        fillerBar[0].style.animation = "";
+                        fillerBar[1].style.animation = "";
+                        fillerBar[2].style.animation = "";
+                        popupDiv.style.display = "none";
+                        tutorialState = 5;
+                    }
+                );
+            }else if(tutorialState == 5){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[0].style.animation = "flashingGreen 2s infinite";
+                if(waitingFor == false){
+                    popupDiv.style.display = "block";
+                    popupTitle.innerHTML = "Lets Start !";
+                    popupText[0].innerHTML = "Click here to select the building you want to create, then click on the map to place it.";
+                    popupText[1].innerHTML = "To build on Mars you need a 3D Printer, which is right there. ";
+                    popupText[2].innerHTML = "";
+                }
+                document.addEventListener(
+                    'click',
+                    () =>{        
+                        popupDiv.style.display = "none";
+                        waitingFor = true;
+                        for(let i = 0; i < grid.length; i++){
+                            for(let j = 0; j < grid.length; j++){
+                                if(grid[i][j][2] == "D3Printer"){
+                                    waitingFor = false;
+                                    buildingButtons[0].style.animation = "";
+                                    tutorialState = 4;
+                                }
+                            }
+                        }
+                    }
+                );
+            }else if(tutorialState == 4){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[1].style.animation = "flashingGreen 2s infinite";
+                buildingButtons[3].style.animation = "flashingYellow 2s infinite";
+                if(waitingFor == false){
+                    popupDiv.style.display = "block";
+                    popupTitle.innerHTML = "Dont starve !";
+                    popupText[0].innerHTML = "The Hydro-Oxygen Complex is essential to start making food and ensure your pilgrim’s life.";
+                    popupText[1].innerHTML = "Most of all, it will unlock your main food building: the greenhouse.";
+                    popupText[2].innerHTML = "You’d better build it fast.";
+                }
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        popupDiv.style.display = "none";
+                        waitingFor = true;
+                        for(let i = 0; i < grid.length; i++){
+                            for(let j = 0; j < grid.length; j++){
+                                if(grid[i][j][2] == "hydroOxygenComplex"){
+                                    waitingFor = false;
+                                    buildingButtons[1].style.animation = "";
+                                    buildingButtons[3].style.animation = "";
+                                    tutorialState = 3;
+                                }
+                            }
+                        }
+                    }
+                );
+            }else if(tutorialState == 3){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[2].style.animation = "flashingGreen 2s infinite";
+                if(waitingFor == false){
+                    popupDiv.style.display = "block";
+                    popupTitle.innerHTML = "Critical energy";
+                    popupText[0].innerHTML = "Watch out !";
+                    popupText[1].innerHTML = "You’re starting to lose energy, you’d better fix this quickly.";
+                    popupText[2].innerHTML = "";
+                }
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        popupDiv.style.display = "none";
+                        waitingFor = true;
+                        for(let i = 0; i < grid.length; i++){
+                            for(let j = 0; j < grid.length; j++){
+                                if(grid[i][j][2] == "solarTurbine"){
+                                    waitingFor = false;
+                                    buildingButtons[2].style.animation = "";
+                                    tutorialState = 2;
+                                }
+                            }
+                        }
+                    }
+                );
+            }else if(tutorialState == 2){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[4].style.animation = "flashingGreen 2s infinite";
+                if(waitingFor == false){
+                    popupDiv.style.display = "block";
+                    popupTitle.innerHTML = "Industrialisation";
+                    popupText[0].innerHTML = "Waow ! You’re a real builder !";
+                    popupText[1].innerHTML = "You will fall short of materials quickly, the factory can help you get more materials.";
+                }
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        popupDiv.style.display = "none";
+                        waitingFor = true;
+                        for(let i = 0; i < grid.length; i++){
+                            for(let j = 0; j < grid.length; j++){
+                                if(grid[i][j][2] == "sulfurFactory"){
+                                    waitingFor = false;
+                                    buildingButtons[4].style.animation = "";
+                                    tutorialState = 1;
+                                }
+                            }
+                        }
+                    }
+                );
+            }else if(tutorialState == 1){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                buildingButtons[9].style.animation = "flashingYellow 2s infinite";
+                popupDiv.style.display = "block";
+                popupTitle.innerHTML = "Population";
+                popupText[0].innerHTML = "One last thing: Your actual population only allows you to build a few buildings.";
+                popupText[1].innerHTML = "Build houses to increase your population and watch out for starvation !";
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        buildingButtons[9].style.animation = "";
+                        tutorialState = 0;
+                    }
+                );
+            }else if(tutorialState == 0){
+                food = maxFood;
+                materials = maxMaterials;
+                energy = maxEnergy;
+                popupDiv.style.display = "block";
+                popupTitle.innerHTML = "Good luck !";
+                popupText[0].innerHTML = "We wish you good luck for SpaceX Mars Colonisation";
+                popupText[1].innerHTML = "Try to send back the spacecraft as quick as possible to be n°1 in the Highscores !";
+                document.addEventListener(
+                    'click',
+                    () =>{
+                        tutorialState = 8;
+                    }
+                );
+            }else if((tutorialState == 8) && (tutoComplete == false)){
+                if(waitingFor == false){
+                    let tab = [];
+                    for(let i = 2; i < app.stage.children.length; i++){
+                        tab.push(i);
+                    }
+                    for(i = tab.length; i > 1; i--){
+                        app.stage.removeChildAt(i);
+                    }
+                    for(let i = 0; i < grid.length; i++){
+                        for(let j = 0; j < grid.length; j++){
+                            if((grid[i][j][2] != 0) && ((grid[i][j][2] != "headQuarters"))){
+                                grid[i][j][2] = 0;
+                                grid[i][j][3] = "Bollocks";
+                            }
+                        }
+                    }
+                    popupDiv.style.display = "none";
+                }
+                waitingFor = true;
+                tutoComplete = true;
+                console.log(tutoComplete);
+            }
+        },
+        100
+    )
+}

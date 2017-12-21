@@ -589,3 +589,34 @@ body{
     }
 }
 
+@keyframes flashing{
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.1;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes flashingGreen{
+    0%{
+    }
+    50%{
+        background: green;
+    }
+    100%{
+    }
+}
+
+@keyframes flashingYellow{
+    0%{
+    }
+    50%{
+        background: yellow;
+    }
+    100%{
+    }
+}
