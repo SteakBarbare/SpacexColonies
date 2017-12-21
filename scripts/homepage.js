@@ -17,16 +17,6 @@ app.renderer.autoResize = true;
 document.body.appendChild(app.view)
 
 const canvas =  document.querySelector("canvas")
-
-//LUCAS
-
-//DEPTH MANAGING
-
-
-//EARTH
-
-
-//TILT
 const tiltCanv = (elem) => {
     const presp="500px",
     width=elem.offsetWidth,
@@ -60,10 +50,9 @@ const loop = () => {
 }
 loop()
 const menuLaunch = () => {
-    //variable
     const starSet = () => {
         const starArray = []
-        //CREATE PARTICLES
+        //CREATING THE STARS PARTICLES
         for(i=0;i<1000;i++){    
             let x= (Math.random() * document.body.offsetWidth)    
             let y= (Math.random() * document.body.offsetHeight)   
@@ -110,11 +99,13 @@ const menuLaunch = () => {
                 hyperSpaceStage()
 
                 const midMenuStage = () => {
+                    //MARS ARRIVAL
                     actionB.innerHTML="P L A Y"
                     logoTitle.style.transform="translateX(-400px)"
                     goalArea.style.opacity=1
                     bottomLink.style.opacity=1
                     marsPlanet.style.opacity=1
+                    marsPlanet.style.animation="planetArrival 0.5s ease-out"
                     actionB.style.top="80%"
                     menuState=1
                     console.log(menuState)

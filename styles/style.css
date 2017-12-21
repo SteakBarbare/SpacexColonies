@@ -332,6 +332,15 @@ will-change: opacity;
     }
 }
 
+@keyframes planetArrival {
+    from{
+    transform: scale(0.1)
+    }
+    to{
+    transform: scale(1)
+    }
+}  
+
 @font-face {
 	font-family: "Lato Medium";
 	src: url("../fonts/Lato-Medium.ttf")
