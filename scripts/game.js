@@ -23,7 +23,8 @@ width: 1920,
 height: 1080,
 antialias: true, 
 transparent: false, 
-resolution: 1
+resolution: 1,
+forceCanvas: true
 });
 
 //Add the canvas that Pixi automatically created for you to the HTML document
@@ -494,6 +495,20 @@ setInterval(
 ()=>{
     if(food <= 0){
         pilgrims -= 1;
+    }if(energy <= 0){
+        pilgrims -= 1;
+        if(pilgrims <= 0){
+            popupDiv.style.display = "block";
+            popupTitle.innerHTML = "Game Over";
+            popupText[0].innerHTML = "Everyone is dead...";
+            popupText[1].innerHTML = "Lets hope the next mission will be a success...";
+            document.addEventListener(
+                'click',
+                () =>{
+                    location.reload();
+                }
+            )
+        }
     }
 },
 5000
