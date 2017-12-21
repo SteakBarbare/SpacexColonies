@@ -721,3 +721,19 @@ body{
     100%{
     }
 }
+@font-face {
+	font-family: "Lato Medium";
+	src: url("../fonts/Lato-Medium.ttf")
+} 
+@font-face {
+	font-family: "Lato Black";
+	src: url("../fonts/Lato-Heavy.ttf")
+} 
+@font-face {
+	font-family: "Lato Light";
+	src: url("../fonts/Lato-Light.ttf")
+} 
+@font-face {
+	font-family: "Lato Thin";
+	src: url("../fonts/Lato-Hairline.ttf")
+} 
