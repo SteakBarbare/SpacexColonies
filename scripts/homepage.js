@@ -17,12 +17,12 @@ document.body.appendChild(app.view)
 
 const canvas =  document.querySelector("canvas")
 const tiltCanv = (elem) => {
+    // This is the tiling function , it's for the organic , following effect
     const presp="500px",
     width=elem.offsetWidth,
     height=elem.offsetHeight,
     midWidth=width / 2,
     midHeight=height / 2
-
     document.addEventListener("mousemove",(event) => {
         const posTop = elem.offsetTop,
         posLeft = elem.offsetLeft,
@@ -34,9 +34,7 @@ const tiltCanv = (elem) => {
         angle=150
         elem.style.transform='perspective(' + perspective + ') rotateX('+(cursorCenterY / angle) +'deg) rotateY('+ -(cursorCenterX / angle) + 'deg)';
         elem.classList.remove("isOut") 
-        elem.addEventListener("mouseover",(event) => {
-            
-            
+        elem.addEventListener("mouseover",(event) => {   
         })
     })
     document.addEventListener("mouseout",(event) => {
@@ -75,10 +73,8 @@ const menuLaunch = () => {
         const bottomLink= document.querySelector(".bottomLink")
         const interactiveMenu=document.querySelector(".interactiveMenu")
         const hyperSpace= document.querySelector(".hyperSpace")
-        const marsPlanet = document.querySelector(".marsPlanet")
-                
-        actionB.addEventListener("click", (event) => {
-            
+        const marsPlanet = document.querySelector(".marsPlanet")      
+        actionB.addEventListener("click", (event) => {        
             if (menuState == 0){
                 const hyperSpaceStage = () => {
                     hyperSpace.style.display="inline-block"
@@ -94,10 +90,8 @@ const menuLaunch = () => {
                         hyperSpace.style.display="none"
                         midMenuStage()
                     },4400)
-
                 }
                 hyperSpaceStage()
-
                 const midMenuStage = () => {
                     //MARS ARRIVAL
                     actionB.innerHTML="P L A Y"
@@ -110,18 +104,13 @@ const menuLaunch = () => {
                     menuState=1
                     console.log(menuState)
                     }
-                }
-                
+                }                
             else if (menuState == 1){
                 document.location.href="pages/game.html"; 
             }
-        })
-        
+        })      
     }
-
     menuSet()
-
 } 
 menuLaunch()
-
 }
