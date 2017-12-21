@@ -1,351 +1,366 @@
 body{
     overflow:hidden;
 }
-/* Style of the menu for buildings constructions during the game */
-.container .menu .buildingsList{
+div,canvas{
+    
+    transform: rotateX(0) rotateY(0);
+    transform-style: preserve-3d;
+    transition-duration: 0s;
+    transition-timing-function: ease-in-out
+    
+    
+}
+.homePage .interactiveMenu{
+width:100vw;
+height:100vh;
+position: absolute;
+z-index: 1;
+will-change: opacity;
+}
+.homePage .buttonUser{
     position: absolute;
-    background: lightblue;
-    width: 100%;
-    height: 10%;
-    top: 90%;
+    width: 100vw;
+    height: 100vh;
     z-index: 1;
-    font-size: 0;
+    background: none;
+}
+.homePage #tiltTest{
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    background: red;
+    position: absolute;
+    z-index: 9;
+    top:calc(50% - 50px);
+    left:calc(50% - 50px);
+}
+.homePage .selecArea{
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    border:3px solid #fefefe;
+    will-change: transform;
+    z-index: 2;
+    background: none;
+    border-radius: 50%;
+    animation-direction: reverse;
+    animation-timing-function: cubic-bezier(.41,.38,.17,.87);
+    transition-duration: 1s;
+    background-repeat: no-repeat;
+    background-position: center;    
+    top:80%;
+    left:70%;
+    opacity: 0;
+}
+.homePage .titleZone{
+    position: absolute;
+    z-index: 45;
+    top: 10%;
+    left: calc(50% - 226px)
+}
+.titleZone .goalArea {
+    color: white;
+    font-family:"Lato Thin";
+    font-weight:100;
+    width: 456px;
+    height: 374px;
+    font-size:60px;
+    text-align: left;
+    opacity: 0;
+    transition-delay: 0.8s;
+    position: absolute;
+    left: -70%;
+    top:170%;
+    transition-duration:0.4s;
+    line-height: 60px;
+}
+.goalArea span{
+    width:100%;
+    display: inline-block;
+}
+.homePage #playBtn{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    border:solid white 1.5px;
+    text-align: center;
+    font-family:"Lato Black";
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+    padding-top: 12px;
+    z-index: 30;
+    transition-duration: 0.5s;
+    left:calc(50% - 100px);
+    top:calc(50% - 25px);
+    will-change: opacity;
+}
+.homePage #playBtn:hover{
+    cursor: pointer;
+    background: white;
+    color:black;
+    border-color: black;
+    perspective: 0px;
 }
 
-/* Styles of buttons menu */
-.container .menu .buildingsList .buildingsButtons{
-    display: inline-block;
-    height: 100px;
-    width: 100px;
-    margin: 0;
-    position: relative;
+.homePage .logoTitle{
+    z-index: 2;
+    top:20%;    
+    left:10%;
+    will-change: transform;
+    transition-duration:0.6s;
+    transition-timing-function: ease-in-out;
+
+}
+.homePage .selecArea:hover{
     cursor: pointer;
 }
-
-/* Styles of visual in the menu bar */
-.container .menu .buildingsList .buildingsButtons img{
-    border: 2px solid black;
-    height: 100%;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-}
-/* Style of every descriptions of buttons in the menu games */
-.container .menu .buildingsList .buildingsButtons .description{
-    background: black;
+.homePage .infoEarth{
     position: absolute;
-    width: 500%;
-    height: 200%;
-    display: none;
+    z-index: 1;
+    width: auto;
+    height:100%;
+    width:300px;  
+    right:0;
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    will-change: transform;
+    
+
 }
-/* CHange padding of buttons to make them have the same width as the other */
-.container .menu .buildingsList .buildingsButtons.silo img{
-    padding-left: 7px;
-    padding-right: 7px;
-}
-.container .menu .buildingsList .buildingsButtons.battery img{
-    padding-left: 7px;
-    padding-right: 7px;
-}
-.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex img{
-    padding-left: 7px;
-    padding-right: 7px;
-}
-.container .menu .buildingsList .buildingsButtons.warehouse img{
-    padding-left: 12px;
-    padding-right: 12px;
-}
-.container .menu .buildingsList .buildingsButtons.sickBay img{
-    padding-left: 7px;
-    padding-right: 7px;
-}
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.threeDPrinter .description.threeDPrinter{
+.infoEarth .earthFrame{
+    position: absolute;
+    height:100%;
+    width: 300px;
+    background: rgba(255,255,255,0.85);  
     left: 0;
-    bottom: 100%;
-}
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.threeDPrinter:hover .description.threeDPrinter{
-    display: block;
-}
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex .description.hydroOxygenComplex{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.hydroOxygenComplex:hover .description.hydroOxygenComplex{
-    display: block;
+.earthFrame h3{
+    font-family:"Lato Black";
+    text-align:center;
+    text-transform: uppercase;
 }
+.homePage .bottomLink{
+    height:6%;
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    font-family: Lato light;
+    color:white;
+    opacity: 0;
+    transition-duration: 0.4s;
+    text-decoration: none;
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.solarTurbine .description.solarTurbine{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.solarTurbine:hover .description.solarTurbine{
-    display: block;
+.bottomLink .gitIco{
+    left:calc(85% - 15px);
+    position: absolute;
+    z-index: 10;
+    top:-5px;
+    text-decoration: none;
 }
+.homePage .bottomLink:hover{
+    cursor: pointer;
+    
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.greenhouse .description.greenhouse{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.greenhouse:hover .description.greenhouse{
-    display: block;
-}
+.bottomLink  .terms{
+    left:calc(20% - 43.5px);
+    position: absolute;
+    z-index: 10;
+    text-decoration: none;
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.sulfurFactory .description.sulfurFactory{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.sulfurFactory:hover .description.sulfurFactory{
-    display: block;
+.bottomLink .copyright{
+    left:calc(50% - 182px);
+    position: absolute;
+    text-decoration: none;
 }
+.bottomLink .linkOfi{
+    left:calc(75% - 60px);
+    position: absolute;
+    text-decoration: none;
+}
+.homePage .hyperSpace{
+    display:none;
+    vertical-align: middle;
+    perspective: 10px;
+    perspective-origin: 100%,100%;
+    position: relative;
+    background: none;
+    width: 100vw;
+    height: 100vh;
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.silo .description.silo{
-    left: 0;
-    bottom: 100%;
-}
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.silo:hover .description.silo{
-    display: block;
-}
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.battery .description.battery{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.battery:hover .description.battery{
-    display: block;
-}
+.hyperSpace .side{
+    background: url(../images/star.png);
+    background-size: cover;
+    position: absolute;
+    opacity: 0;
+    animation: starFade 5s infinite linear;
+    animation-delay: 0;
+    width: 100vw;
+    height:100vh;
 
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.drill .description.drill{
-    left: 0;
-    bottom: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.drill:hover .description.drill{
-    display: block;
+.hyperSpace .starContainer{
+    position: absolute;
+    width: 100%;;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: starMove 6s infinite linear;
+    animation-fill-mode: forwards;
+    z-index: 10;
+    background: none;
 }
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.warehouse .description.warehouse{
-    left: 0;
-    bottom: 100%;
+.hyperspace::before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.warehouse:hover .description.warehouse{
-    display: block;
+.starContainer .sideRight {
+    transform: rotateY(90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    width: 2200px;
+    
 }
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.lauchingRamp .description.lauchingRamp{
-    left: 0;
-    bottom: 100%;
+.starContainer .sideLeft {
+    transform: rotateY(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.lauchingRamp:hover .description.lauchingRamp{
-    display: block;
+.starContainer .sideTop {
+    transform: rotateX(90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    height:1100px;
+    
 }
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.houses .description.houses{
-    left: 0;
-    bottom: 100%;
+.starContainer .sideBottom {
+    transform: rotateX(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
+    height: 1100px;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.houses:hover .description.houses{
-    display: block;
+.starContainer .sideBack {
+    transform: rotateX(-90deg) translateZ(500px);
+    background:url(../images/star.jpg);
 }
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.sickBay .description.sickBay{
-    right: 0;
-    bottom: 100%;
+.hyperSpace .backgroundSpace{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+    background: black;
+    transition-duration: 0s;
+    border-radius: 100%;
 }
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.sickBay:hover .description.sickBay{
-    display: block;
-}
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.sportsHall .description.sportsHall{
-    right: 0;
-    bottom: 100%;
-}
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.sportsHall:hover .description.sportsHall{
-    display: block;
-}
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.leindenfrostTurbine .description.leindenfrostTurbine{
-    right: 0;
-    bottom: 100%;
-}
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.leindenfrostTurbine:hover .description.leindenfrostTurbine{
-    display: block;
-}
-
-/* Place the description over its associate button */
-.container .menu .buildingsList .buildingsButtons.oilSlickDrill .description.oilSlickDrill{
-    right: 0;
-    bottom: 100%;
-}
-/* Change the opacity of the description to make it appear on hover */
-.container .menu .buildingsList .buildingsButtons.oilSlickDrill:hover .description.oilSlickDrill{
-    display: block;
-}
-
-/* Style of the texts insides descriptions elements */
-.container .menu .buildingsList .buildingsButtons .description{
-    color: white;
-    font-size: 16px;
-}
-
-.container .menu .buildingsList .buildingsButtons .description h1{
-    color: rgb(211, 211, 211);
-    font-size: 32px;
-    margin:5px 10px;
-}
-
-.container .menu .buildingsList .buildingsButtons .description span{
-    color: rgb(211, 211, 211);
-    font-size: 22px;
-    margin:5px 10px;
-}
-
-.container .menu .buildingsList .buildingsButtons .description p{
-    color: rgb(211, 211, 211);
-    font-size: 16px;
-    margin:5px 10px;
+.homePage .marsPlanet{
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    left:calc(50% - 202px);
+    top:calc(50% - 201px);
+    will-change: opacity;
+    transition-duration: 0.4s;
+    border-radius:50%;
+    filter:drop-shadow(0px 0px 38px white);
+    
 }
 
 
-@media (max-width: 1450px){
-    .container .menu .buildingsList{
-        position: absolute;
-        background: lightblue;
-        width: 100%;
-        height: 7%;
-        top: 93%;
-        z-index: 1;
-        font-size: 0;
-    }
-    .container .menu .buildingsList .buildingsButtons .description{
-        background: black;
-        position: absolute;
-        width: 650%;
-        height: 250%;
-        display: none;
-    }
-    .container .menu .buildingsList .buildingsButtons .description h1{
-        color: rgb(211, 211, 211);
-        font-size: 28px;
-        margin:5px 10px;
+
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
     }
     
-    .container .menu .buildingsList .buildingsButtons .description span{
-        color: rgb(211, 211, 211);
-        font-size: 17px;
-        margin:5px 10px;
+    50% {
+        transform: scale3d(1.2, 1.2, 1.2);
     }
     
-    .container .menu .buildingsList .buildingsButtons .description p{
-        color: rgb(211, 211, 211);
-        font-size: 14px;
-        margin:5px 10px;
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+@keyframes expend {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        transform: scale3d(1.3, 1.3, 1.3);
+    }
+}
+@keyframes entranceRight {
+    from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    }
+    to {
+    opacity: 1;
+    transform: none;
+    
+    }
+}
+@keyframes exitRight {
+    from {
+    opacity: 1;
+    transform: none;
+    }
+    to {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
     }
 }
 
-@media (max-width: 1110px){
-    .container .menu .buildingsList{
-        position: absolute;
-        background: lightblue;
-        width: 100%;
-        height: 5%;
-        top: 95%;
-        z-index: 1;
-        font-size: 0;
+@keyframes starMove {
+    0%{
+        transform: translateZ(-500px) rotate(0deg);
     }
-    .container .menu .buildingsList .buildingsButtons .description{
-        background: black;
-        position: absolute;
-        width: 850%;
-        height: 350%;
-        display: none;
+    100%{
+        transform: translateZ(500px) rotate(0deg);
     }
-    .container .menu .buildingsList .buildingsButtons .description h1{
-        color: rgb(211, 211, 211);
-        font-size: 26px;
-        margin:5px 10px;
+}  
+@keyframes starFade {
+    0%{
+        opacity: 0;
     }
-    
-    .container .menu .buildingsList .buildingsButtons .description span{
-        color: rgb(211, 211, 211);
-        font-size: 17px;
-        margin:5px 10px;
+    25% {
+        opacity: 1;
     }
-    
-    .container .menu .buildingsList .buildingsButtons .description p{
-        color: rgb(211, 211, 211);
-        font-size: 14px;
-        margin:5px 10px;
+    75% {
+        opacity: 1;
     }
-    
-    /* Place the description over its associate button */
-    .container .menu .buildingsList .buildingsButtons.oilSlickDrill .description.oilSlickDrill{
-        right: 0;
-        bottom: 100%;
+    100%{
+        opacity: 0;
     }
 }
 
-@media (max-width: 920px){
-    .container .menu .buildingsList{
-        position: absolute;
-        background: lightblue;
-        width: 100%;
-        height: 4%;
-        top: 96%;
-        z-index: 1;
-        font-size: 0;
+@keyframes planetArrival {
+    from{
+    transform: scale(0.1)
     }
-    .container .menu .buildingsList .buildingsButtons .description{
-        background: black;
-        position: absolute;
-        width: 850%;
-        height: 500%;
-        display: none;
-        padding: 5px;
+    to{
+    transform: scale(1)
     }
-    .container .menu .buildingsList .buildingsButtons .description h1{
-        color: rgb(211, 211, 211);
-        font-size: 25px;
-        margin:5px 2px;
-    }
-    
-    .container .menu .buildingsList .buildingsButtons .description span{
-        color: rgb(211, 211, 211);
-        font-size: 16px;
-        margin: 5px 2px;
-    }
-    
-    .container .menu .buildingsList .buildingsButtons .description p{
-        color: rgb(211, 211, 211);
-        font-size: 13px;
-        margin:5px 2px;
-    }
-}
+}  
 
+@font-face {
+	font-family: "Lato Medium";
+	src: url("../fonts/Lato-Medium.ttf")
+} 
+@font-face {
+	font-family: "Lato Black";
+	src: url("../fonts/Lato-Heavy.ttf")
+} 
+@font-face {
+	font-family: "Lato Light";
+	src: url("../fonts/Lato-Light.ttf")
+} 
+@font-face {
+	font-family: "Lato Thin";
+	src: url("../fonts/Lato-Hairline.ttf")
+} 
