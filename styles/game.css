@@ -4,7 +4,18 @@ body{
 }
 /*****************************
 
-            Pop-Up
+        To much resize
+
+******************************/
+.container .toMuchResize{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+/*****************************
+
+        Tutorial Pop-Up
 
 ******************************/
 .container .popUp{
@@ -50,6 +61,87 @@ body{
 
 .container .popUp .okButton:hover {
     background: rgb(65, 65, 65);
+}
+
+/*****************************
+
+  Buildings description Pop-Up
+
+******************************/
+
+.container .buildingsPopUp{
+    position: absolute;
+    z-index: 1;
+    background: rgb(35, 35, 35);
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    width: 20%;
+    height: 40%;
+    top: 40%;
+    left: 40%;
+    text-align: center;
+}
+
+.container .buildingsPopUp .buildingsH1{
+    color: white;
+    font-size: 22px;
+    margin-bottom: 8%;
+}
+
+.container .buildingsPopUp .buildingsDescription{
+    color: white;
+    font-size: 16px;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.container .buildingsPopUp .title{
+    font-size: 18px;
+    color: white;
+}
+
+.container .buildingsPopUp .logoRessources{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 0.6rem;
+}
+
+.container .buildingsPopUp .descriptionLogos{
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    bottom: -2%;    
+}
+
+.container .buildingsPopUp .upgradeButton{
+    left: 4%;
+}
+
+.container .buildingsPopUp .upgradeButton img{
+    position: absolute;
+}
+
+.container .buildingsPopUp .eraseButton img{
+    position: absolute;
+}
+
+.container .buildingsPopUp .eraseButton{
+    right: 24%;
+}
+
+.container .buildingsPopUp .descriptionLogos img.hover{
+    opacity: 0;
+    transition: opacity 0.5s;
+    will-change: opacity;
+}
+
+.container .buildingsPopUp .descriptionLogos.upgradeButton:hover .hover{
+    opacity: 1;
+}
+
+.container .buildingsPopUp .descriptionLogos.eraseButton:hover .hover{
+    opacity: 1;
 }
 
 
@@ -572,6 +664,7 @@ body{
     }
     @media (max-width: 900px){
         .container .toMuchResize{
+            display: block;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -580,6 +673,11 @@ body{
             color: white;
             font-size: 40px;
             text-align: center;
+            opacity: 0;
+        }
+        
+        body:hover .container .toMuchResize{
+            opacity: 1;
         }
 
         .container .toMuchResize span{
@@ -588,6 +686,7 @@ body{
         }
     }
 }
+
 
 @keyframes flashing{
     0%{
