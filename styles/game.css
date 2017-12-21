@@ -100,6 +100,10 @@ body{
     color: white;
 }
 
+.container .buildingsPopUp .lastEffect{
+    margin-bottom: 25%;
+}
+
 .container .buildingsPopUp .logoRessources{
     width: 15px;
     height: 15px;
@@ -115,7 +119,7 @@ body{
 }
 
 .container .buildingsPopUp .upgradeButton{
-    left: 4%;
+    left: -8%;
 }
 
 .container .buildingsPopUp .upgradeButton img{
@@ -127,7 +131,7 @@ body{
 }
 
 .container .buildingsPopUp .eraseButton{
-    right: 24%;
+    right: 14%;
 }
 
 .container .buildingsPopUp .descriptionLogos img.hover{
@@ -142,6 +146,12 @@ body{
 
 .container .buildingsPopUp .descriptionLogos.eraseButton:hover .hover{
     opacity: 1;
+}
+
+
+.container .buildingsPopUp .close{
+    font-size: 18px;
+    color: white;
 }
 
 
@@ -232,6 +242,52 @@ body{
 }
 .container .ressourcesBar .ressource.materials .gauge .gaugeFiller{
     background: #555453;
+}
+
+/*****************************
+
+         Technology Tree
+
+******************************/
+
+.container .technoTreeContainer{
+    display: none;
+}
+
+.container .technoTreeContainer .technoTree{
+    position: absolute;
+    z-index: 3;
+    height: 90%;
+    width: 40%;
+    top: 5%;
+    border: 2px solid black;
+    border-radius: 6px;
+    /* //transform: translateX(-100%); */
+    transition: transform 0.4s cubic-bezier(0, 1.25, 0.44, 1.4);
+}
+
+
+.container .technoTreeContainer .technoTree img{
+    height: 100%;
+    width: 100%;
+}
+
+.container .technoTreeContainer .arrowButton{
+    position: absolute;
+    top: 45%;
+    right: -10%;
+    background: rgb(35, 35, 35);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.container .technoTreeContainer .arrowButton span{
+    position: absolute;
+    color: white;
+    font-size: 50px; 
+    top: 16%;
+    left: 35%;
 }
 
 /*****************************
@@ -567,6 +623,9 @@ body{
         border: 2px solid black;
         padding-right: 10px;
     }
+    .container .buildingsPopUp .lastEffect{
+        margin-bottom: 15%;
+    }
 }
 
 @media (max-width: 1110px){
@@ -613,6 +672,11 @@ body{
         background: rgb(35, 35, 35);
         border: 2px solid black;
         padding-right: 10px;
+    }
+
+    .container .buildingsPopUp{
+        width: 20%;
+        height: 45%;
     }
 }
 
