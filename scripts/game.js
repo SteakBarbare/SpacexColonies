@@ -3,7 +3,8 @@ let buildingName = "headQuarters";
 const popupDiv = document.querySelector(".popUp");
 const popupTitle = popupDiv.querySelector(".popUpH1");
 const popupText = popupDiv.querySelectorAll(".popUpParagraph");
-
+const audio = document.querySelector("audio")
+audio.currentTime=currentSongTime
 let Application = PIXI.Application,
     loader = PIXI.loader,
     resources = PIXI.loader.resources,

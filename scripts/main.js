@@ -1,5 +1,9 @@
+//AUDIO RELATED VARIABLES
+const audio = document.querySelector("audio")
+let currentSongTime=0
 
 homePage()
+
 
 //Buildings cost and effects
 

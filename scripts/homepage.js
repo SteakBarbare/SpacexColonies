@@ -76,7 +76,8 @@ const menuLaunch = () => {
         const bottomLink= document.querySelector(".bottomLink")
         const interactiveMenu=document.querySelector(".interactiveMenu")
         const hyperSpace= document.querySelector(".hyperSpace")
-        const marsPlanet = document.querySelector(".marsPlanet")        
+        const marsPlanet = document.querySelector(".marsPlanet")
+                
         actionB.addEventListener("click", (event) => {
             
             if (menuState == 0){
@@ -113,6 +114,8 @@ const menuLaunch = () => {
                 }
                 
             else if (menuState == 1){
+                currentSongTime=audio.currentTime
+                console.log(currentSongTime)
                 document.location.href="pages/game.html"; 
             }
         })
@@ -123,5 +126,5 @@ const menuLaunch = () => {
 
 } 
 menuLaunch()
-//FIN LUCAS
+
 }

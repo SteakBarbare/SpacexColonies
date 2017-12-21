@@ -5,6 +5,7 @@
         <meta name = 'viewport' content = 'width = device-width, initial-scale = 1'>
         <link rel="stylesheet" href="styles/reset.css">
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="icon" href="images/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="manifest" href="manifest.json">
         <link rel="mask-icon" href="safari-pinned-tab.svg" color="#679a2c">
@@ -18,6 +19,7 @@
     </head>
 
     <body>
+        <audio src="sounds/ambiant.mp3"autoplay loop></audio>
         <section class="homePage">
                 <div class="selecPlay" id="playBtn">B E G I N</div> 
             <div class="interactiveMenu">
@@ -70,7 +72,7 @@
             
         </section>
         
-       
+
         <script type="text/javascript">
             let type = "WebGL"
             if(!PIXI.utils.isWebGLSupported()){
