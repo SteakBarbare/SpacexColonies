@@ -105,7 +105,7 @@ const menuLaunch = () => {
                     goalArea.style.opacity=1
                     bottomLink.style.opacity=1
                     marsPlanet.style.opacity=1
-                    marsPlanet.style.animation="planetArrival 0.5s ease-out"
+                    marsPlanet.style.animation="planetArrival 0.5s cubic-bezier(.24,.4,.87,1.08)"
                     actionB.style.top="80%"
                     menuState=1
                     console.log(menuState)

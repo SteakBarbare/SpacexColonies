@@ -154,6 +154,13 @@ will-change: opacity;
     text-decoration: none;
 
 }
+.bottomLink .gitIco{
+    left:calc(85% - 15px);
+    position: absolute;
+    z-index: 10;
+    top:-5px;
+    text-decoration: none;
+}
 .homePage .bottomLink:hover{
     cursor: pointer;
     
@@ -259,7 +266,7 @@ will-change: opacity;
     will-change: opacity;
     transition-duration: 0.4s;
     border-radius:50%;
-    filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+    filter:drop-shadow(0px 0px 38px white);
     
 }
 
