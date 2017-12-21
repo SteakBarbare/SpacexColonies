@@ -80,6 +80,7 @@ body{
     top: 40%;
     left: 40%;
     text-align: center;
+    display: none;
 }
 
 .container .buildingsPopUp .buildingsH1{
