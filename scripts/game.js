@@ -9,7 +9,9 @@ selectionTitle = selectionDiv.querySelector(".buildingsH1"),
 selectionText = selectionDiv.querySelector(".buildingsDescription"),
 selectionProd = selectionDiv.querySelectorAll(".title"),
 selectionUpgrade = selectionDiv.querySelector(".upgradeButton"),
-selectionErase = selectionDiv.querySelector(".eraseButton")
+selectionErase = selectionDiv.querySelector(".eraseButton");
+
+
 let Application = PIXI.Application,
 loader = PIXI.loader,
 resources = PIXI.loader.resources,
