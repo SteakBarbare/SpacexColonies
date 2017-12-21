@@ -1,3 +1,6 @@
+
+homePage()
+
 //Buildings cost and effects
 
 const headQuarters = {
@@ -229,5 +232,4 @@ const oilSlickDrill = {
 const buildingsDetails =[headQuarters, threeDPrinter, hydroOxygenComplex, solarTurbine, greenhouse, sulfurFactory, silo, battery, warehouse, launchingRamp, houses, sickBay, sportsHall, leindenfrostTurbine, oilSlickDrill]
 
 console.log(buildingsDetails)
-
 
