@@ -10,8 +10,7 @@ let app = new Application({
     height: 3000,                       
     antialias: true, 
     transparent: false, 
-    resolution: 1,
-    forceCanvas: true
+    resolution: 1
 })
 app.renderer.autoResize = true;
 document.body.appendChild(app.view)
