@@ -24,13 +24,7 @@ const canvas =  document.querySelector("canvas")
 
 
 //EARTH
-loader
-    .add("images/earth.png")
-    .load(setup);
-    let earth;
-function setup() {
-    
-}
+
 
 //TILT
 const tiltCanv = (elem) => {
@@ -62,7 +56,7 @@ const tiltCanv = (elem) => {
 }
 const loop = () => {
     window.requestAnimationFrame(loop)
-    tiltCanv(document.querySelector(".selecPlay"))
+    // tiltCanv(document.querySelector(".selecPlay"))
 }
 loop()
 const menuLaunch = () => {
@@ -93,62 +87,10 @@ const menuLaunch = () => {
         const bottomLink= document.querySelector(".bottomLink")
         const interactiveMenu=document.querySelector(".interactiveMenu")
         const hyperSpace= document.querySelector(".hyperSpace")
-        const marsPlanet = document.querySelector(".marsPlanet")
-        // const organicCircle = (elem) => {
-        //     document.addEventListener("mousemove",(event) => {
-        //         cursorX = event.clientX,
-        //         cursorY = event.clientY,
-        //         posELemX = elem.offsetLeft,
-        //         posELemY = elem.offsetTop,
-        //         xRatio=posELemX - cursorX,
-        //         yRatio=posELemY - cursorY
-        //         // const circleAttractFar = (elem) => {
-        //         //     const tendX = xRatio-15
-        //         //     const tendY = yRatio-15
-        //         //     elem.style.transform="translate3d(-"+tendX+"px,-"+tendY+"px,0)"
-        //         //     console.log(elem.style.transform)
-        //         // }
-                
-        //         if(xRatio < 0 && xRatio > -70 && yRatio < 0 && yRatio > -70){
-        //             elem.style.animation="expend 0.2s both"
-        //             elem.style.backgroundImage="url('images/x.png')"
-        //         }
-        //         else if(xRatio <100 && yRatio<100){
-        //             elem.style.animation=""
-        //             elem.style.backgroundImage=""
-        //             // circleAttractFar(elem)
-                    
-        //         }
-        //         else{
-        //             elem.style.animation="pulse 3s infinite"
-                    
-        //         }
-        //     })
-        // }
-        // organicCircle(earthArea)  
-        // //EarthAREA interaction
-        // const infoEarth=document.querySelector(".infoEarth")
-        // let infoAppeared=0
-        // earthArea.addEventListener("click",() => {
-        //     if (infoAppeared == 0){
-        //         infoEarth.style.animation="entranceRight 0.4s forwards"
-        //         infoAppeared=1
-
-        //     }
-        //     else {
-        //         infoEarth.style.animation="exitRight 0.4s forwards "
-        //         infoAppeared=0
-                
-        //     }
-        // })
-
-        //PlayButton
-
-        
+        const marsPlanet = document.querySelector(".marsPlanet")        
         actionB.addEventListener("click", (event) => {
             
             if (menuState == 0){
-
                 const hyperSpaceStage = () => {
                     hyperSpace.style.display="inline-block"
                     canvas.style.opacity=0
@@ -168,27 +110,24 @@ const menuLaunch = () => {
                 hyperSpaceStage()
 
                 const midMenuStage = () => {
-                    
                     actionB.innerHTML="P L A Y"
                     logoTitle.style.transform="translateX(-400px)"
                     goalArea.style.opacity=1
                     bottomLink.style.opacity=1
                     marsPlanet.style.opacity=1
                     actionB.style.top="80%"
-                    
-
+                    menuState=1
+                    console.log(menuState)
+                    }
                 }
-
-            menuState=1
-            }
-            if(menuState == 1){
-                // launchGame();
-
-                // LE CODE EST A AJOUTER ICI
+                
+            else if (menuState == 1){
+                document.location.href="pages/game.html"; 
             }
         })
         
     }
+
     menuSet()
 
 } 
