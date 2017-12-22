@@ -12,11 +12,21 @@
     </head>
 
     <body>
+        <!-- Sound Ambience -->
         <audio src="../sounds/inGame.mp3"autoplay loop></audio>
+
         <div class="container">
+            <!-- ( ͡° ͜ʖ ͡°) -->
             <div class="toMuchResize">
-                <span>Je pense pas qu'il y ait de bon ou de mauvais responsive, mais là vous abusez un peu.</span>
+                <span>
+                        Vous savez, moi je ne crois pas qu’il y ait de bon ou de mauvais responsive. Moi, si je devais résumer mon responsive aujourd’hui avec vous, 
+                        je dirais que c’est d’abord des media query. Des propriétés CSS qui m’ont tendu la main, peut-être à un moment où je ne pouvais pas, où j’étais seul 
+                        chez moi. Et c’est assez curieux de se dire que les hasards, les rencontres forgent un responsive...
+                        Mais là vous abusez un peu quand même, c'est pas un jeu mobile nundjudju !
+                </span>
             </div>
+
+            <!-- Popup Template -->
             <div class="popUp">
                 <h1 class="popUpH1">Begin</h1>
                 <p class="popUpParagraph">
@@ -33,6 +43,8 @@
                 </p>
                 <span class="okButton">I understand !</span>
             </div>
+
+            <!-- Popup Building Selection on map -->
             <div class="buildingsPopUp">
                 <h1 class="buildingsH1">Headquarters</h1>
                 <p class="buildingsDescription">
@@ -73,12 +85,14 @@
                     <img class="hover" src="../images/logobuildingsDescription/openTrash.svg" alt="Upgrade ?">
                 </div>
             </div>
+
+            <!-- Popup Conditions not met -->
             <div class="youNeedTo">
                 <p class="moreMaterials">
-                    You need <span>40 energy</span> and <span> 100 materials</span> to build this.
+                    You need40 energy to build this.
                 </p>
                 <p class="moreBuildings">
-                    You need to build <span></span> to unlock this building.
+                    You need to build to unlock this building.
                 </p>
                 <p class="morePopulation">
                     You need to create more houses to build more buildings.
@@ -169,7 +183,7 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description solarTurbine">
                                     <h1>Solar Turbine</h1>
-                                    <span>Cost: 30 energy 15 Materials</span>
+                                    <span>Cost: 30 energy 25 Materials</span>
                                     <span>5 energy/second</span>
                                     <p>
                                         Solar panels are the most efficient way to generate energy on this planet. The installation site was chosen among other things for its sunshine. During the regular Martian wind storms, a wind turbine takes over as the sun will be covered.
@@ -183,7 +197,7 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description greenhouse">
                                     <h1>Greenhouse</h1>
-                                    <span>Cost: 30 energy 15 Materials</span>
+                                    <span>Cost: 20 energy 20 Materials</span>
                                     <span>10 energy/second</span>
                                     <p>
                                         It is in the greenhouse that food production is ensured for the colony. Several methods are used: recreating the Earth's atmosphere, seeds adapted to the Martian soil and breeding insects for proteins.
@@ -197,8 +211,8 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description sulfurFactory">
                                     <h1>Sulfur Factory</h1>
-                                    <span>Cost: 40 energy 15 Materials</span>
-                                    <span>10 energy/second</span>
+                                    <span>Cost: 130 energy 25 Materials</span>
+                                    <span>5 energy/second</span>
                                     <p>
                                         This factory will drill the sulphate pockets of the Martian soil to extract sulphur in liquid form. It will then process this sulphur to create a kind of concrete, usable by the 3D printer, to create buildings.
                                     </p>
@@ -211,12 +225,12 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description silo">
                                     <h1>Silo</h1>
-                                    <span>Cost: 50 energy 25 Materials</span>
-                                    <span>5 energy/second</span>
+                                    <span>Cost: 50 energy 50 Materials</span>
+                                    <span>10 energy/second</span>
                                     <p>
                                         Silos are used to store food supplied by the greenhouse.
                                     </p>
-                                    <span>Food capacity +100</span>
+                                    <span>Food capacity +20</span>
                                     <span>Unlock Silo 2</span> 
                                 </div>
                             </div>
@@ -225,12 +239,12 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description battery">
                                     <h1>Battery</h1>
-                                    <span>Cost: 75 energy 75 Materials</span>
-                                    <span>5 energy/second</span>
+                                    <span>Cost: 150 energy 80 Materials</span>
+                                    <span>10 energy/second</span>
                                     <p>
                                         The batteries store the energy supplied by the solar turbine and the Leidenfrost engine.
                                     </p>
-                                    <span>Energy capacity +200</span>
+                                    <span>Energy capacity +50</span>
                                     <span>Unlock Solar Central 2</span> 
                                 </div>
                             </div>
@@ -239,12 +253,12 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description warehouse">
                                     <h1>Warehouse</h1>
-                                    <span>Cost: 75 energy 75 Materials</span>
-                                    <span>5 energy/second</span>
+                                    <span>Cost: 200 energy 100 Materials</span>
+                                    <span>10 energy/second</span>
                                     <p>
                                         The Sulphur Concrete Warehouse stores materials created by the factory.
                                     </p>
-                                    <span>Energy capacity +200</span>
+                                    <span>Energy capacity +50</span>
                                     <span>Unlock Sulfur Factory 2</span>
                                 </div>
                             </div>
@@ -253,7 +267,7 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description lauchingRamp">
                                     <h1>Lauching Ramp</h1>
-                                    <span>Cost: 150 energy 90 Materials</span>
+                                    <span>Cost: 300 energy 250 Materials</span>
                                     <span>50 energy/second</span>
                                     <p>
                                         The launch pad makes it possible to relaunch a rocket towards Earth, making Mars a complete and autonomous colony. When we are able to make regular human trips back and forth on Mars, we will be able to affirm that it is a planet colonized by man.
@@ -267,11 +281,11 @@
                                 <div class="description houses">
                                     <h1>Houses</h1>
                                     <span>Cost: 50 energy 35 Materials</span>
-                                    <span>8 energy/second</span>
+                                    <span>10 energy/second</span>
                                     <p>
                                         These six houses can accommodate twenty pilgrims. It is thanks to these buildings that you can increase the size of your colony.
                                     </p>
-                                    <span>+20 Colons</span> 
+                                    <span>+20 Pilgrims</span> 
                                     <span>Unlock Sick Bay</span> 
                                 </div>
                             </div>
@@ -294,7 +308,7 @@
                                 <div class="description sportsHall">
                                     <h1>Sports Hall</h1>
                                     <span>Cost: 150 energy 100 Materials</span>
-                                    <span>15 energy/second</span>
+                                    <span>20 energy/second</span>
                                     <p>
                                         The gravity on the surface of Mars is only 38% of the Earth's gravity. This will pose major problems for those who wish to live on its surface: loss of muscle mass and bone density. Thus, a physical exercise program is needed to strengthen bones and ensure good health for pilgrims.
                                     </p>
@@ -306,7 +320,7 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description leindenfrostTurbine">
                                     <h1>Leindenfrost Turbine</h1>
-                                    <span>Cost: 500 energy 300 Materials</span>
+                                    <span>Cost: 300 energy 200 Materials</span>
                                     <span>20 energy/second</span>
                                     <p>
                                         The Leidenfrost effect describes the chemical reaction that occurs when a liquid comes into contact with an extremely hot surface (more than 160°). The liquid will levitate 0.1mm above the surface. This levitating liquid, placed in a concave bowl, will move very quickly, this cinetic force will create electricity. 
@@ -320,12 +334,11 @@
                                 <!-- Description of the buildings that appear on hover on the button -->
                                 <div class="description oilSlickDrill">
                                     <h1>Oil Slick Drill</h1>
-                                    <span>Cost: 300 energy 800 Materials</span>
+                                    <span>Cost: 350 energy 300 Materials</span>
                                     <span>100 energy/second</span>
                                     <p>
                                         Sur Mars, la meilleure façon de construire des bâtiments est de les imprimer en 3D avec un composé de béton issu du soufre. Cette imprimante géante va vous permettre d’imprimer tout ce dont vous aurez besoin pour faire prospérer votre colonie.
                                     </p>
-                                    <span>+200 Energy/second</span> 
                                     <span>Lauching Ramp</span> 
                                 </div>
                             </div>
