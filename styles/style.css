@@ -271,7 +271,12 @@ will-change: opacity;
     
 }
 
-@media (max:width)
+@media (max-width:1240px){
+    .homePage .marsPlanet{
+        transition-duration: 0;
+    }
+    
+}
 
 
 
