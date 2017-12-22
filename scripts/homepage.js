@@ -102,7 +102,9 @@ const menuLaunch = () => {
                     //MARS ARRIVAL
                     actionB.innerHTML="P L A Y"
                     logoTitle.style.transform="translateX(-400px)"
+                    logoTitle.classList.add("responsiveTitle")
                     goalArea.style.opacity=1
+                    goalArea.classList.add("responsiveCaption")
                     bottomLink.style.opacity=1
                     marsPlanet.style.opacity=1
                     marsPlanet.style.animation="planetArrival 0.5s cubic-bezier(.24,.4,.87,1.08)"

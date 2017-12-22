@@ -272,8 +272,12 @@ will-change: opacity;
 }
 
 @media (max-width:1240px){
-    .homePage .marsPlanet{
-        transition-duration: 0;
+    .homePage .responsiveTitle{
+        margin-left:400px;
+        transition: transform 0s;
+    }
+    .homePage .responsiveCaption{
+        left:-25%;
     }
     
 }
