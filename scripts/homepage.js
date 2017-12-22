@@ -6,8 +6,8 @@ resources = PIXI.loader.resources,
 Sprite = PIXI.Sprite
 //Create a Pixi Application
 let app = new Application({ 
-    width: 1920, 
-    height: 1080,                       
+    width: 3000, 
+    height: 3000,                       
     antialias: true, 
     transparent: false, 
     resolution: 1
