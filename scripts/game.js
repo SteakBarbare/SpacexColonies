@@ -126,7 +126,7 @@ function setup() {
         popupText[0].innerHTML = "You made it: you created an autonomous colony on Mars !";
         popupText[1].innerHTML = "Now that Spacex recovered the spacecraft, we'll be able to send the next pilgrims";
         popupText[2].innerHTML = `You succuded in ${timer}, click anywhere to manage the next pilgrims wave`;
-        popupOkButton.innerHTML = "Ready ?"
+        popupOkButton.innerHTML = "Ready ?";
     }else if(buildingName == "leindenfrostTurbine"){
         sprite = new PIXI.Sprite(PIXI.loader.resources.leindenfrostTurbine.texture);
         sprite.x = coordX;
@@ -569,7 +569,7 @@ setInterval(
                 popupTitle.innerHTML = "Game Over";
                 popupText[0].innerHTML = "Everyone is dead...";
                 popupText[1].innerHTML = "Lets hope the next mission will be a success...";
-                popupOkButton.innerHTML = "Try again ?"
+                popupOkButton.innerHTML = "Try again ?";
                 document.addEventListener(
                     'click',
                     () =>{
